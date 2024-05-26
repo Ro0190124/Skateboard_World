@@ -1,0 +1,198 @@
+﻿@model Skateboard_World.Models.SAN_PHAM
+@{
+    ViewData["Title"] = "Chi Tiết Sản Phẩm";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+@* 
+
+<div>
+
+    <dl class="row" style="color:white">
+        <dt class="col-sm-2">
+            Hình Ảnh
+        </dt>
+        <dd class="col-sm-10">
+            <div id="currentImages">
+                @if (Model.DS_HINH_ANH != null && Model.DS_HINH_ANH.Any())
+                {
+                    foreach (var img in Model.DS_HINH_ANH)
+                    {
+                        <img src="@img.MediaHinhAnh" width="100px" height="100px" />
+                    }
+                }
+                else
+                {
+                    <p>Không có hình ảnh</p>
+                }
+            </div>
+
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TenSP)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TenSP)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GiaBan)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GiaBan)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TrangThai)
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.TrangThai == true)
+            {
+                <div class="text-success">
+                    Đang bán
+                </div>
+            }
+            else
+            {
+                <div class="text-danger">
+                    Ngừng bán
+                </div>
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MoTa)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MoTa)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="" asp-route-id="@Model?.MaSP"><button class="btn btn-outline-primary px-3">Thêm Vào Giỏ </button></a> |
+    <a asp-action=""><button class="btn btn-outline px-3">Mua Ngay</button></a>
+</div>
+ *@
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- Product Image -->
+        <div class="col-md-6">
+            @if (Model.DS_HINH_ANH != null && Model.DS_HINH_ANH.Any())
+            {
+                foreach (var img in Model.DS_HINH_ANH)
+                {
+                    <img src="@img.MediaHinhAnh" width="500px" height="500px" />
+                    break;
+                }
+            }
+            else
+            {
+                <p>Không có hình ảnh</p>
+            }
+
+
+
+          @*   <div class="modal_tab">
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="modal_tab_button row">
+                        <ul class="product_navactive col-3" role="tablist">
+                            @foreach (var image in Model.DS_HINH_ANH.Select((value, index) => new { Value = value, Index = index }))
+                            {
+                                <li>
+                                    <a class="nav-link" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false">
+                                        <img src="@image.Value.MediaHinhAnh" alt="@Model.TenSP" class="img-thumbnail" data-index="@image.Index">
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                        <div class="tab-pane col-9 fade show active" id="tab1" role="tabpanel">
+                            <div class="modal_tab_img">
+                                <a href="#"><img id="selectedImage" src="@Model.DS_HINH_ANH.ElementAtOrDefault(0)?.MediaHinhAnh" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div> *@
+        </div>
+        <!-- Product Details -->
+        <div class="col-md-6">
+            <h1 class="display-4">@Model.TenSP</h1>
+            
+            <h3 class="my-4">@Model.GiaBan đ</h3>
+            
+            <!-- Product Options -->
+           
+            <!-- Quantity and Add to Cart Button -->
+            <div class="form-group">
+                <label for="quantityInput">Quantity:</label>
+                <input type="number" class="form-control" id="quantityInput" value="1">
+            </div>
+           </<br />
+            <div class="form-group">
+                <button class="btn btn-primary btn-lg btn-block">Thêm Vào Giỏ</button>
+                <button class="btn btn-primary btn-lg btn-block">Mua Ngay</button>
+            </div>
+            
+        </div>
+        <p>Mô tả: @Model.MoTa</p> 
+    </div>
+   
+</div>
+
+
+            <script>
+    $(document).ready(function () {
+        $('.plus-btn').click(function () {
+            console.log("12312312 +");
+            var currentVal = parseInt($(this).prev().val());
+            if (!isNaN(currentVal)) {
+                $(this).prev().val(currentVal + 1);
+            }
+        });
+
+        $('.minus-btn').click(function () {
+            var currentVal = parseInt($(this).next().val());
+            if (!isNaN(currentVal) && currentVal > 1) {
+                $(this).next().val(currentVal - 1);
+            }
+        });
+    });
+    function showMore() {
+        var showMoreText = document.querySelector('.btn-show-more');
+        var description = document.querySelector('.modal_description');
+
+        if (description.classList.contains('show-less')) {
+            description.classList.remove('show-less');
+            description.classList.add('show-more');
+            showMoreText.innerText = 'Ẩn bớt';
+        } else {
+            description.classList.remove('show-more');
+            description.classList.add('show-less');
+            showMoreText.innerText = 'Xem thêm';
+        }
+    };
+    $(document).ready(function () {
+        $(".nav-link").click(function (e) {
+            e.preventDefault();
+
+            // Lấy chỉ số từ thuộc tính data-index
+            var index = $(this).find("img").data("index");
+            console.log(index);
+            // Lấy đường dẫn hình ảnh tương ứng từ Model
+            var imageUrl = $(this).find("img").attr("src"); // Đây là đường dẫn mới cần lấy từ hình ảnh được click
+            console.log(imageUrl);
+
+            // Cập nhật hình ảnh được chọn
+            $("#selectedImage").attr("src", imageUrl);
+
+            // (Tùy chọn) Cập nhật tiêu đề hoặc thông tin khác nếu cần
+            // $("#selectedImage").attr("alt", $(this).find("img").attr("alt"));
+        });
+    });
+            </script>

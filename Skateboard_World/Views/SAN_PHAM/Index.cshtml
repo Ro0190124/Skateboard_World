@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Skateboard_World.Models.HINH_ANH_SAN_PHAM>
+
+@{
+    ViewData["Title"] = "Sản Phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<a asp-action="Create">
+    <button type="submit" class="btn btn-success">
+        Tạo Sản phẩm
+        <div class="ripple-container"></div>
+    </button>
+</a>
+<div class="card">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Hình ảnh</th>
+                <th>@Html.DisplayNameFor(model => model.SanPham.TenSP)</th>
+                <th>@Html.DisplayNameFor(model => model.SanPham.GiaNhap)</th>
+                <th>@Html.DisplayNameFor(model => model.SanPham.GiaBan)</th>
+                <th>@Html.DisplayNameFor(model => model.SanPham.SoLuong)</th>
+                <th>@Html.DisplayNameFor(model => model.SanPham.NgayTao)</th>
+                <th>@Html.DisplayNameFor(model => model.SanPham.TrangThai)</th>
+                <th>@Html.DisplayNameFor(model => model.SanPham.MoTa)</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                string trangThai = "Đang Bán";
+            }
+            @foreach (var item in Model)
+            {
+
+
+                <tr>
+                    <td>
+
+                        @foreach (var image in item.HinhAnhList)
+                        {
+                            <img src="@image.MediaHinhAnh" width="100px" height="100px" alt="Image" />
+                            break;
+                        }
+
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.SanPham.TenSP)</td>
+                    <td>@Html.DisplayFor(modelItem => item.SanPham.GiaNhap)</td>
+                    <td>@Html.DisplayFor(modelItem => item.SanPham.GiaBan)</td>
+                    <td>@Html.DisplayFor(modelItem => item.SanPham.SoLuong)</td>
+                    <td>@Html.DisplayFor(modelItem => item.SanPham.NgayTao)</td>
+                    @if (item.SanPham.TrangThai == true)
+                    {
+                        <td>
+                            <div class="text-success">
+                                Đang bán
+                            </div>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <div class="text-danger">
+                                Ngừng bán
+                            </div>
+                        </td>
+
+                    }
+
+                    <td>@item.SanPham.MoTa.Substring(0, Math.Min(item.SanPham.MoTa.Length, 10))</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.SanPham.MaSP"><i class="material-icons">more</i></a>
+                        <a asp-action="Edit" asp-route-id="@item.SanPham.MaSP"><i class="material-icons">edit</i></a>
+                        <a asp-action="Delete" asp-route-id="@item.SanPham.MaSP"><i class="material-icons">close</i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+

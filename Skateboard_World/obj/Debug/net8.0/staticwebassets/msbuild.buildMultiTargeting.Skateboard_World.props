@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Skateboard_World.props" />
+</Project>

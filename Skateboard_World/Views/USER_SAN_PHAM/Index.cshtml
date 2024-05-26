@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Skateboard_World.Models.HINH_ANH_SAN_PHAM>
+
+@{
+    ViewData["Title"] = "Sản Phẩm";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
+    <h1 class="text-primary mb-3" style="color: red"><span class="fw-light text-dark">Ván trượt</span> Mới</h1>
+    <p class="mb-5"> </p>
+</div>
+<div class="row g-4">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
+            <div class="product-item text-center border h-100 p-4">
+                @foreach (var image in item.HinhAnhList)
+                {
+                    <img src="@image.MediaHinhAnh" width="200px" height="300px" alt="Image" />
+                    break;
+                }
+                <div class="mb-2">
+                    <small class="fa fa-star text-primary"></small>
+                    <small class="fa fa-star text-primary"></small>
+                    <small class="fa fa-star text-primary"></small>
+                    <small class="fa fa-star text-primary"></small>
+                    <small class="fa fa-star text-primary"></small>
+                    <small>(99)</small>
+                </div>
+                <a asp-action="Details" asp-route-id="@item.SanPham.MaSP" asp-controller="USER_SAN_PHAM" class="h6 d-inline-block mb-2">@item.SanPham.TenSP</a>
+                <h5 class="text-primary mb-3">@item.SanPham.GiaBan đ</h5>
+                <a href="" class="btn btn-outline-primary px-3">Thêm Vào Giò</a>
+            </div>
+        </div>
+
+    }
+</div>

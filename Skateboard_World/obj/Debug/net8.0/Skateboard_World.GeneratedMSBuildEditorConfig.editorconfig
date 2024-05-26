@@ -1,0 +1,111 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Skateboard_World
+build_property.RootNamespace = Skateboard_World
+build_property.ProjectDir = D:\FPT\C(Sharp)_5\Skateboard_World\Skateboard_World\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\FPT\C(Sharp)_5\Skateboard_World\Skateboard_World
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/FPT/C(Sharp)_5/Skateboard_World/Skateboard_World/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/FPT/C(Sharp)_5/Skateboard_World/Skateboard_World/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/FPT/C(Sharp)_5/Skateboard_World/Skateboard_World/Views/NGUOI_DUNG/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTkdVT0lfRFVOR1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/FPT/C(Sharp)_5/Skateboard_World/Skateboard_World/Views/NGUOI_DUNG/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTkdVT0lfRFVOR1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/FPT/C(Sharp)_5/Skateboard_World/Skateboard_World/Views/NGUOI_DUNG/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTkdVT0lfRFVOR1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/FPT/C(Sharp)_5/Skateboard_World/Skateboard_World/Views/NGUOI_DUNG/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTkdVT0lfRFVOR1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/FPT/C(Sharp)_5/Skateboard_World/Skateboard_World/Views/NGUOI_DUNG/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTkdVT0lfRFVOR1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/FPT/C(Sharp)_5/Skateboard_World/Skateboard_World/Views/SAN_PHAM/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU0FOX1BIQU1cQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/FPT/C(Sharp)_5/Skateboard_World/Skateboard_World/Views/SAN_PHAM/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU0FOX1BIQU1cRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/FPT/C(Sharp)_5/Skateboard_World/Skateboard_World/Views/SAN_PHAM/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU0FOX1BIQU1cRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/FPT/C(Sharp)_5/Skateboard_World/Skateboard_World/Views/SAN_PHAM/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU0FOX1BIQU1cRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/FPT/C(Sharp)_5/Skateboard_World/Skateboard_World/Views/SAN_PHAM/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU0FOX1BIQU1cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/FPT/C(Sharp)_5/Skateboard_World/Skateboard_World/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/FPT/C(Sharp)_5/Skateboard_World/Skateboard_World/Views/Shared/_LayoutUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRVc2VyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/FPT/C(Sharp)_5/Skateboard_World/Skateboard_World/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/FPT/C(Sharp)_5/Skateboard_World/Skateboard_World/Views/USER_SAN_PHAM/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVVNFUl9TQU5fUEhBTVxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/FPT/C(Sharp)_5/Skateboard_World/Skateboard_World/Views/USER_SAN_PHAM/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVVNFUl9TQU5fUEhBTVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/FPT/C(Sharp)_5/Skateboard_World/Skateboard_World/Views/USER_SAN_PHAM/Product.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVVNFUl9TQU5fUEhBTVxQcm9kdWN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/FPT/C(Sharp)_5/Skateboard_World/Skateboard_World/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/FPT/C(Sharp)_5/Skateboard_World/Skateboard_World/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/FPT/C(Sharp)_5/Skateboard_World/Skateboard_World/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-bzwvslt4mn

@@ -1,0 +1,127 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+   
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="~/css/site.css" rel="stylesheet">
+</head>
+<body>
+   
+    <!-- Navbar Start -->
+    <div class="container-fluid sticky-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light p-0">
+                <a href="index.html" class="navbar-brand">
+                    <h2 class="text-black">Skateboard World</h2>
+                </a>
+                <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
+                        data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto">
+                        <a asp-action="Index" asp-controller="USER_SAN_PHAM" class="nav-item nav-link active">Trang Chủ</a>
+                        <a  href="about.html" class="nav-item nav-link">Sản Phẩm</a>
+                        <a href="product.html" class="nav-item nav-link">Liên Hệ</a>
+                        <div class="nav-item dropdown">
+                            <a class="nav-link " data-bs-toggle="dropdown">Tài Khoản</a>
+                            <div class="dropdown-menu bg-light mt-2">
+                                <a href="feature.html" class="dropdown-item">Đăng Nhập</a>
+                                <a href="how-to-use.html" class="dropdown-item">Đăng Ký</a>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <a href="" class="btn btn-dark py-2 px-4 d-none d-lg-inline-block">Giỏ Hàng</a>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+
+
+    <!-- Hero Start ( có thể bỏ) -->
+    <div class="container-fluid bg-primary hero-header mb-5">
+
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6 text-center text-lg-start">
+                    
+                    <h1 class="display-4 text-white animated slideInRight"> Nếu bạn là một người yêu thích bộ môn ván trượt, hãy đến với chúng tôi  <span class="fw-light text-dark"></span></h1>
+                    <h3 class="fw-light text-white animated slideInRight">THẾ GIỚI VÁN TRƯỢT</h3>
+                    <p class="text-white mb-4 animated slideInRight">
+                     
+                    </p>
+                    @* <a href="" class="btn btn-dark py-2 px-4 me-3 animated slideInRight">Shop Now</a>
+                    <a href="" class="btn btn-outline-dark py-2 px-4 animated slideInRight">Contact Us</a> *@
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    <!-- Hero End -->
+
+
+
+    <!-- Product Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            @RenderBody()
+          
+        </div>
+    </div>
+    <!-- Product End -->
+    <!-- Footer Start -->
+    <div class="container-fluid bg-white footer" style="background-color: #5c3e83">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
+                    <a href="index.html" class="d-inline-block mb-3">
+                        <h1 class="text-primary">Skateboard World</h1>
+                    </a>
+                    <p class="mb-0">
+                        Thông tin của chúng tôi
+                    </p>
+                </div>
+                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
+                    <h5 class="mb-4">Liên hệ</h5>
+                    <p><i class="fa fa-map-marker-alt me-3"></i>2270 Nguyễn Văn Cừ</p>
+                    <p><i class="fa fa-phone-alt me-3"></i>+84 334 346 923</p>
+                    <p><i class="fa fa-envelope me-3"></i>skateboadworld.com</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-square btn-outline-primary me-1" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square btn-outline-primary me-1" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square btn-outline-primary me-1" href=""><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-square btn-outline-primary me-1" href="">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
+                    <h5 class="mb-4">Sản phẩm </h5>
+                    <a class="btn " href="">Ván trượt</a>
+                </div>
+                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
+                    <h5 class="mb-4">Các thông tin khác</h5>
+                    <a class="btn" href="">Về chúng tôi</a>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    
+</body>
+</html>
