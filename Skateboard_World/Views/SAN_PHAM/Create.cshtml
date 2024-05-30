@@ -1,0 +1,75 @@
+﻿@model Skateboard_World.Models.SAN_PHAM
+
+@{
+    ViewData["Title"] = "Thêm Sản Phẩm Mới";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TenSP" class="control-label"></label>
+                <input asp-for="TenSP" class="form-control" />
+                <span asp-validation-for="TenSP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GiaNhap" class="control-label"></label>
+                <input asp-for="GiaNhap" type="number" class="form-control" />
+                <span asp-validation-for="GiaNhap" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GiaBan" class="control-label"></label>
+                <input asp-for="GiaBan" type="number" class="form-control" />
+                <span asp-validation-for="GiaBan" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SoLuong" class="control-label"></label>
+                <input asp-for="SoLuong" class="form-control" />
+                <span asp-validation-for="SoLuong" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoTa" class="control-label"></label>
+                <textarea asp-for="MoTa" class="form-control"></textarea>
+                <span asp-validation-for="MoTa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="HinhAnhTaiLen" class="control-label">Hình Ảnh</label>
+                <input type="file" id="HinhAnhTaiLen" name="HinhAnhTaiLen" multiple class="form-control" onchange="previewImages()" />
+            </div>
+            <div class="form-group" id="reloadImage"></div>
+            <div>
+                <input type="submit" value="Thêm sản phẩm" class="btn btn-success" />
+                <a asp-action="Index"><button class="btn btn-primary">Trở về</button></a>
+            </div>
+           
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function previewImages() {
+            var preview = document.querySelector('#reloadImage');
+            preview.innerHTML = '';
+            var files = document.querySelector('input[type=file]').files;
+            function readAndPreview(file) {
+                if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                    var reader = new FileReader();
+                    reader.addEventListener("load", function () {
+                        var image = new Image();
+                        image.height = 100;
+                        image.title = file.name;
+                        image.src = this.result;
+                        preview.appendChild(image);
+                    }, false);
+                    reader.readAsDataURL(file);
+                }
+            }
+            if (files) {
+                [].forEach.call(files, readAndPreview);
+            }
+        }
+    </script>
+}

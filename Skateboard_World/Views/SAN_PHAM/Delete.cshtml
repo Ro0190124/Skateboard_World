@@ -1,0 +1,92 @@
+﻿@model Skateboard_World.Models.SAN_PHAM
+
+@{
+    ViewData["Title"] = "Xóa Sản Phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-action="Delete" enctype="multipart/form-data">
+  
+    <div>
+        <h2 style="color: red">Vui lòng xem xét thông tin kỹ lưỡng trước khi xóa</h2>
+        <dl class="row" style="color:white">
+            <dt class="col-sm-2">
+                Hình Ảnh
+            </dt>
+            <dd class="col-sm-10">
+                <div id="currentImages">
+                    @if (Model.DS_HINH_ANH != null && Model.DS_HINH_ANH.Any())
+                    {
+                        foreach (var img in Model.DS_HINH_ANH)
+                        {
+                            <img src="@img.MediaHinhAnh" width="100px" height="100px" />
+                        }
+                    }
+                    else
+                    {
+                        <p>Không có hình ảnh</p>
+                    }
+                </div>
+
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TenSP)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TenSP)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.GiaNhap)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.GiaNhap)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.GiaBan)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.GiaBan)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.SoLuong)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.SoLuong)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.NgayTao)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NgayTao)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrangThai)
+            </dt>
+            <dd class="col-sm-10">
+                @if (Model.TrangThai == true)
+                {
+                    <div class="text-success">
+                        Đang bán
+                    </div>
+                }
+                else
+                {
+                    <div class="text-danger">
+                        Ngừng bán
+                    </div>
+                }
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.MoTa)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.MoTa)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Delete" asp-route-id="@Model?.MaSP"><button class="btn btn-danger">XÓA</button></a> |
+        <a asp-action="Index"><button class="btn btn-primary">Trở về</button></a>
+    </div>
+
+</form>

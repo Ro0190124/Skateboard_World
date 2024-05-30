@@ -1,0 +1,120 @@
+﻿@model IEnumerable<Skateboard_World.Models.NGUOI_DUNG>
+
+@{
+    ViewData["Title"] = "Người Dùng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<a asp-action="Create">
+    <button type="submit" class="btn btn-success">
+        Thêm người dùng
+        <div class="ripple-container">
+        </div>
+    </button>
+</a>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TenND)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoDienThoai)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenTaiKhoan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatKhau)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgaySinh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayTao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaChi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhanQuyen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrangThai)
+            </th>
+            <th>Thao Tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenND)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoDienThoai)
+                </td>
+                <td>
+                    @item.Email.Substring(0, Math.Min(item.Email.Length, 20))
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenTaiKhoan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MatKhau)
+                </td>
+                <td>
+                    @(item.NgaySinh?.ToString("dd/MM/yyyy") ?? "N/A")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayTao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiaChi)
+                </td>
+                <td>
+                    @if (item.PhanQuyen == false)
+                    {
+                        <div>
+                            admin
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+                            admin
+                        </div>
+                    }
+                </td>
+
+
+
+                <td>
+                    @if (item.TrangThai == true)
+                    {
+                        <div class="text-success">
+                            Đang hoạt động
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-danger">
+                            Ngừng hoạt động
+                        </div>
+                    }
+
+
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.MaND"><i class="material-icons">info</i></a>
+                    <a asp-action="Edit" asp-route-id="@item.MaND"><i class="material-icons">edit</i></a> |
+                    <a asp-action="Delete" asp-route-id="@item.MaND"><i class="material-icons">close</i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
