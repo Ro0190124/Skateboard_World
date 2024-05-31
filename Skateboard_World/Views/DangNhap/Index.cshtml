@@ -1,0 +1,25 @@
+﻿@model NGUOI_DUNG
+@{
+    ViewData["Title"] = "Đăng Nhập";
+    Layout = "~/Views/Shared/_DangNhap.cshtml";
+}
+
+<h2 style="color:white"> @ViewData["Title"]</h2>
+
+<div style="margin: auto " >
+
+    <form  method="post">
+        <div class="mb-3">
+            <label class="form-label">Tên Tài Khoản</label>
+            <input asp-for="TenTaiKhoan" type="text" class="form-control" id="TenTaiKhoan" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Mật Khẩu</label>
+            <input asp-for="MatKhau"  type="password" class="form-control" id="MatKhau" required>
+        </div>
+        <a></a>
+        <button type="submit" class="btn btn-primary w-100">Đăng Nhập</button>
+    </form>
+
+    <a asp-action="DangKi" class="register-link">Đăng ký nếu chưa có tài khoản</a>
+</div>

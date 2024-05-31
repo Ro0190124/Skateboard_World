@@ -54,10 +54,11 @@ namespace Skateboard_World.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaND,TenND,SoDienThoai,Email,TenTaiKhoan,MatKhau,NgaySinh,NgayTao,DiaChi,PhanQuyen,TrangThai")] NGUOI_DUNG nGUOI_DUNG)
+        public async Task<IActionResult> Create([Bind("MaND,TenND,SoDienThoai,Email,TenTaiKhoan,MatKhau,NgaySinh,NgayTao,DiaChi,TrangThai")] NGUOI_DUNG nGUOI_DUNG)
         {
             if (ModelState.IsValid)
             {
+                nGUOI_DUNG.PhanQuyen = true;
                 _context.Add(nGUOI_DUNG);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

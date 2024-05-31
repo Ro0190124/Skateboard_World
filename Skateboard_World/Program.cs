@@ -33,7 +33,7 @@ namespace Skateboard_World
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=DangNhap}/{action=Index}/{id?}");
 
             app.Run();
         }
