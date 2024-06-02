@@ -103,15 +103,17 @@ img.animated.pulse {
     .navbar .navbar-nav .nav-link {
         margin-right: 45px;
         padding: 0;
-        color: var(--bs-dark);
+        color: white;
         font-weight: 500;
         transition: .5s;
         outline: none;
+        font-size: 22px;
     }
 
         .navbar .navbar-nav .nav-link:hover,
         .navbar .navbar-nav .nav-link.active {
-            color: var(--bs-white);
+            color: #c396ec;
+            font-size: 22px
         }
 
     .navbar .dropdown-toggle::after {
@@ -305,11 +307,11 @@ img.animated.pulse {
     }
 
 .testimonial-carousel .owl-item img {
-    width: 120px;
-    height: 120px;
+    width: 300px;
+    height: 300px;
     border-color: rgba(255, 255, 255, .2) !important;
     margin: 0 auto 20px auto;
-    border-radius: 100px;
+  /*  border-radius: 100px;*/
 }
 
 .testimonial-carousel .owl-dots {

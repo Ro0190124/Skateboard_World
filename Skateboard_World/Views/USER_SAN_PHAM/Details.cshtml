@@ -4,78 +4,6 @@
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
-@* 
-
-<div>
-
-    <dl class="row" style="color:white">
-        <dt class="col-sm-2">
-            Hình Ảnh
-        </dt>
-        <dd class="col-sm-10">
-            <div id="currentImages">
-                @if (Model.DS_HINH_ANH != null && Model.DS_HINH_ANH.Any())
-                {
-                    foreach (var img in Model.DS_HINH_ANH)
-                    {
-                        <img src="@img.MediaHinhAnh" width="100px" height="100px" />
-                    }
-                }
-                else
-                {
-                    <p>Không có hình ảnh</p>
-                }
-            </div>
-
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TenSP)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TenSP)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.GiaBan)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.GiaBan)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.SoLuong)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.SoLuong)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TrangThai)
-        </dt>
-        <dd class="col-sm-10">
-            @if (Model.TrangThai == true)
-            {
-                <div class="text-success">
-                    Đang bán
-                </div>
-            }
-            else
-            {
-                <div class="text-danger">
-                    Ngừng bán
-                </div>
-            }
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MoTa)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MoTa)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="" asp-route-id="@Model?.MaSP"><button class="btn btn-outline-primary px-3">Thêm Vào Giỏ </button></a> |
-    <a asp-action=""><button class="btn btn-outline px-3">Mua Ngay</button></a>
-</div>
- *@
 
 <div class="container mt-5">
     <div class="row">
@@ -94,31 +22,6 @@
                 <p>Không có hình ảnh</p>
             }
 
-
-
-          @*   <div class="modal_tab">
-                <div class="tab-content" id="pills-tabContent">
-                    <div class="modal_tab_button row">
-                        <ul class="product_navactive col-3" role="tablist">
-                            @foreach (var image in Model.DS_HINH_ANH.Select((value, index) => new { Value = value, Index = index }))
-                            {
-                                <li>
-                                    <a class="nav-link" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false">
-                                        <img src="@image.Value.MediaHinhAnh" alt="@Model.TenSP" class="img-thumbnail" data-index="@image.Index">
-                                    </a>
-                                </li>
-                            }
-                        </ul>
-                        <div class="tab-pane col-9 fade show active" id="tab1" role="tabpanel">
-                            <div class="modal_tab_img">
-                                <a href="#"><img id="selectedImage" src="@Model.DS_HINH_ANH.ElementAtOrDefault(0)?.MediaHinhAnh" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div> *@
         </div>
         <!-- Product Details -->
         <div class="col-md-6">
@@ -195,4 +98,4 @@
             // $("#selectedImage").attr("alt", $(this).find("img").attr("alt"));
         });
     });
-            </script>
+</script>
