@@ -1,0 +1,37 @@
+﻿@model Skateboard_World.Models.CHI_TIET_GIO_HANG
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>CHI_TIET_GIO_HANG</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SAN_PHAM)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SAN_PHAM.MoTa)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GIO_HANG)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GIO_HANG.MaGioHang)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.MaCTGH">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -4,11 +4,25 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+
+
+    <!--Tbao-->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+
+
+
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- CSS Files -->
     <link href="/css/assets/css/material-dashboard.css" rel="stylesheet" />
+
+    <!--Tbao-->
+    <link rel="stylesheet" href="./js/toastr.js/toastr.min.css" />
+    <script src="./js/toastr.js/toastr.min.js"></script>
+
     <style>
         body {
             background-color: #17213c;
@@ -22,6 +36,8 @@
     </style>
 </head>
 <body>
+
+    <partial name="_Notification" />
     <div>
         @RenderBody()
     </div>

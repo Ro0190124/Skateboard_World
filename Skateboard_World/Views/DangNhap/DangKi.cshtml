@@ -1,0 +1,60 @@
+﻿@model Skateboard_World.Models.NGUOI_DUNG
+
+@{
+    ViewData["Title"] = "Đăng kí";
+    Layout = "~/Views/Shared/_DangNhap.cshtml";
+}
+
+<h2 style="color:white"> @ViewData["Title"]</h2>
+
+
+<div style="margin: auto; width:350px ">
+
+   
+        <form method="post">
+           
+           @*  <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div> *@
+            <div class="form-group">
+                <label asp-for="TenTaiKhoan" class="control-label"></label>
+                <input asp-for="TenTaiKhoan" class="form-control" />
+                <span asp-validation-for="TenTaiKhoan" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MatKhau" class="control-label"></label>
+                <input asp-for="MatKhau" type="password" class="form-control" />
+                <span asp-validation-for="MatKhau" class="text-danger"></span>
+            </div>
+             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TenND" class="control-label"></label>
+                <input asp-for="TenND" class="form-control" />
+                <span asp-validation-for="TenND" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SoDienThoai" class="control-label"></label>
+                <input asp-for="SoDienThoai" class="form-control" />
+                <span asp-validation-for="SoDienThoai" class="text-danger"></span>
+            </div>
+           @*  <div class="form-group">
+                <label asp-for="NgaySinh" class="control-label"></label>
+                <input asp-for="NgaySinh" type="date" class="form-control" />
+                <span asp-validation-for="NgaySinh" class="text-danger"></span>
+            </div> *@
+
+           @*  <div class="form-group">
+                <label asp-for="DiaChi" class="control-label"></label>
+                <input asp-for="DiaChi" class="form-control" />
+                <span asp-validation-for="DiaChi" class="text-danger"></span>
+            </div>
+ *@
+            <div class="form-group">
+                <input type="submit" value="Đăng Kí" class="btn btn-primary w-100" />
+            </div>
+        </form>
+
+    <a asp-action="Index" asp-controller="DangNhap" class="register-link">Đã có tài khoản? Đăng nhập </a>
+</div>

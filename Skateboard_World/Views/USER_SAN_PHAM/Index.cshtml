@@ -9,8 +9,25 @@
     <p class="mb-5"> </p>
 </div>
 <div class="row g-4">
+    @{
+        var sp = Model.OrderBy(x => x.SanPham.NgayTao).ToList();
+        var listSP = new List<HINH_ANH_SAN_PHAM>();
+        if(sp.Count >= 4)
+        {
+            for (int i = (sp.Count() -1); i >= (sp.Count() - 4); i--)
+            {
+                listSP.Add(sp[i]);
+            }
 
-    @foreach (var item in Model)
+        }
+        else
+        {
+            listSP = sp;
+        }
+        
+
+    }
+    @foreach (var item in listSP)
     {
         <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
             <div class="product-item text-center border h-100 p-4">
@@ -32,38 +49,44 @@
                 <a href="" class="btn btn-outline-primary px-3">Thêm Vào Giò</a>
             </div>
         </div>
-
     }
 </div>
 
+@{
+
+}
 <!-- Testimonial Start -->
 <div class="container-fluid testimonial bg-primary my-5 py-5">
     <div class="container text-white py-5">
         <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
-            <h1 class="text-white mb-3">Our Customer Said <span class="fw-light text-dark">About Our Natural Shampoo</span></h1>
-            <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aliquet, erat non malesuada consequat, nibh erat tempus risus.</p>
+            <h1 class="text-white mb-3">SẢN PHẨM BÁN CHẠY NHẤT<span class="fw-light text-dark"></span></h1>
+            <p class="mb-5"></p>
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-8">
+                @{
+
+                    var spNoiBat = ViewData["SanPhamNoiBat"] as List<HINH_ANH_SAN_PHAM>;
+                }
+
                 <div class="owl-carousel testimonial-carousel wow fadeIn" data-wow-delay="0.1s">
-                    <div class="testimonial-item text-center" data-dot="1">
-                        <img class="img-fluid border p-2" style="width:auto" src="~/images/2acc94aa-d2fb-4d8b-a24d-552d931c392b_VikmaxVT00661.jpg" alt="">
-                        <h5 class="fw-light lh-base text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aliquet, erat non malesuada consequat, nibh erat tempus risus, vitae porttitor purus nisl vitae purus. Praesent tristique odio ut rutrum pellentesque. Fusce eget molestie est, at rutrum est. Nullam scelerisque libero nunc, vitae ullamcorper elit volutpat ut.</h5>
-                        <h5 class="mb-1">Client Name</h5>
-                        <h6 class="fw-light text-white fst-italic mb-0">Profession</h6>
-                    </div>
-                    <div class="testimonial-item text-center" data-dot="2">
-                        <img class="img-fluid border p-2" style="width:auto" src="~/images/2fe87b54-a1c2-4627-b9e3-2247d72ceaa0_083584d83e4ec683f8140582372c36a0.jpg" alt="">
-                        <h5 class="fw-light lh-base text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aliquet, erat non malesuada consequat, nibh erat tempus risus, vitae porttitor purus nisl vitae purus. Praesent tristique odio ut rutrum pellentesque. Fusce eget molestie est, at rutrum est. Nullam scelerisque libero nunc, vitae ullamcorper elit volutpat ut.</h5>
-                        <h5 class="mb-1">Client Name</h5>
-                        <h6 class="fw-light text-white fst-italic mb-0">Profession</h6>
-                    </div>
-                    <div class="testimonial-item text-center" data-dot="3">
-                        <img class="img-fluid border p-2" style="width:auto" src="~/images/5f91357b-dc82-433f-aee6-65e672e8f616_vantruot.jpg" alt="">
-                        <h5 class="fw-light lh-base text-white">Lorem ipsum dolor sit amet, consectetur acarosedipiscing elit. Duis aliquet, erat non malesuada consequat, nibh erat tempus risus, vitae porttitor purus nisl vitae purus. Praesent tristique odio ut rutrum pellentesque. Fusce eget molestie est, at rutrum est. Nullam scelerisque libero nunc, vitae ullamcorper elit volutpat ut.</h5>
-                        <h5 class="mb-1">Client Name</h5>
-                        <h6 class="fw-light text-white fst-italic mb-0">Profession</h6>
-                    </div>
+                    @foreach(var item in spNoiBat)
+                    {
+                        <div class="testimonial-item text-center" data-dot="">
+                            @foreach (var image in item.HinhAnhList)
+                            {
+                                <img class="img-fluid border p-2" style="width:auto" src="@image.MediaHinhAnh" alt="">
+                                
+                                break;
+                            }
+                            <a asp-action="Details" asp-route-id="@item.SanPham.MaSP" asp-controller="USER_SAN_PHAM" class="h6 w-inline-block mb-2" style="color: white">@item.SanPham.TenSP</a>
+                            <h5 class="fw-light lh-base text-white">@item.SanPham.GiaBan đ </h5>
+                            <a href="" class="btn btn-outline-success px-3">Thêm Vào Giò</a>
+                        </div>
+
+                      
+                       
+                    }
                 </div>
             </div>
         </div>

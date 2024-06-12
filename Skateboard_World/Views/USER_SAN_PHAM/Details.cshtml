@@ -9,20 +9,45 @@
     <div class="row">
         <!-- Product Image -->
         <div class="col-md-6">
-            @if (Model.DS_HINH_ANH != null && Model.DS_HINH_ANH.Any())
-            {
-                foreach (var img in Model.DS_HINH_ANH)
-                {
-                    <img src="@img.MediaHinhAnh" width="500px" height="500px" />
-                    break;
-                }
-            }
-            else
-            {
-                <p>Không có hình ảnh</p>
-            }
+            <div class="tab-content" id="pills-tabContent">
+                <div class="modal_tab_button row">
+                    <ul class="product_navactive col-3" role="tablist">
+                      @*   <div class="image-container">
+                            <button onclick="previous()">&lt;</button>
+                            <img id="im1" src="" alt="" width="200" height="200">
+                            <img id="im2" src="" alt="" width="200" height="200">
+                            <img id="im3" src="" alt="" width="200" height="200">
+                            <img id="im4" src="" alt="" width="200" height="200">
+                            <button onclick="next()">&gt;</button>
+                        </div> *@
+                        @if (Model.DS_HINH_ANH != null && Model.DS_HINH_ANH.Any())
+                        {
+                            foreach (var img in Model.DS_HINH_ANH.Select((value, index) => new { Value = value, Index = index }))
+                            {
+                                <li>
+                                    <a class="nav-link" href="#" role="tab">
+                                        <img src="@img.Value.MediaHinhAnh" alt="@Model.TenSP" class="img-thumbnail" data-index="@img.Index">
+                                    </a>
 
+                                </li>
+
+                                Console.WriteLine(img.Index)  ;
+                            }
+                        }
+                        else
+                        {
+                            <p>Không có hình ảnh</p>
+                        }
+                    </ul>
+                    <div class="tab-pane col-9 fade show active" id="tab1" role="tabpanel">
+                        <div class="modal_tab_img">
+                            <a href="#"><img id="selectedImage" src="@Model.DS_HINH_ANH.ElementAtOrDefault(0)?.MediaHinhAnh" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+       
         <!-- Product Details -->
         <div class="col-md-6">
             <h1 class="display-4">@Model.TenSP</h1>
@@ -33,11 +58,11 @@
            
             <!-- Quantity and Add to Cart Button -->
             <div class="form-group">
-                <label for="quantityInput">Quantity:</label>
-                <input type="number" class="form-control" id="quantityInput" value="1">
+                <label for="quantityInput">Số lượng</label>
+                <input type="number" class="form-control" id="quantityInput" value="1" style="    width: 70px;">
             </div>
            </<br />
-            <div class="form-group">
+            <div class="form-group" style="margin-top: 20px;">
                 <button class="btn btn-primary btn-lg btn-block">Thêm Vào Giỏ</button>
                 <button class="btn btn-primary btn-lg btn-block">Mua Ngay</button>
             </div>
@@ -48,54 +73,43 @@
    
 </div>
 
+<style>
+    
 
-            <script>
-    $(document).ready(function () {
-        $('.plus-btn').click(function () {
-            console.log("12312312 +");
-            var currentVal = parseInt($(this).prev().val());
-            if (!isNaN(currentVal)) {
-                $(this).prev().val(currentVal + 1);
-            }
-        });
+    .modal_tab_img {
+        height: 400px;
+        overflow: hidden;
+    }
 
-        $('.minus-btn').click(function () {
-            var currentVal = parseInt($(this).next().val());
-            if (!isNaN(currentVal) && currentVal > 1) {
-                $(this).next().val(currentVal - 1);
-            }
-        });
-    });
-    function showMore() {
-        var showMoreText = document.querySelector('.btn-show-more');
-        var description = document.querySelector('.modal_description');
+    .modal_tab_img img {
+        object-fit: fill;
+        height: 100%;
+    }
 
-        if (description.classList.contains('show-less')) {
-            description.classList.remove('show-less');
-            description.classList.add('show-more');
-            showMoreText.innerText = 'Ẩn bớt';
-        } else {
-            description.classList.remove('show-more');
-            description.classList.add('show-less');
-            showMoreText.innerText = 'Xem thêm';
-        }
-    };
+
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
     $(document).ready(function () {
         $(".nav-link").click(function (e) {
             e.preventDefault();
 
-            // Lấy chỉ số từ thuộc tính data-index
+            // Get the index from the data-index attribute
             var index = $(this).find("img").data("index");
-            console.log(index);
-            // Lấy đường dẫn hình ảnh tương ứng từ Model
-            var imageUrl = $(this).find("img").attr("src"); // Đây là đường dẫn mới cần lấy từ hình ảnh được click
-            console.log(imageUrl);
+            console.log("Clicked image index: ", index);
+            console.log("Hoạt động mà?");
 
-            // Cập nhật hình ảnh được chọn
+            // Get the image URL from the clicked image's src attribute
+            var imageUrl = $(this).find("img").attr("src");
+            console.log("Image URL: ", imageUrl);
+
+            // Update the selected image's src attribute
             $("#selectedImage").attr("src", imageUrl);
 
-            // (Tùy chọn) Cập nhật tiêu đề hoặc thông tin khác nếu cần
+            // Optionally, update alt text or other attributes if needed
             // $("#selectedImage").attr("alt", $(this).find("img").attr("alt"));
         });
     });
+
+
 </script>
