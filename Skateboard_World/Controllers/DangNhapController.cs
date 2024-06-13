@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Skateboard_World.Data;
 using Skateboard_World.Models;
+
 using System.Text;
 
 namespace Skateboard_World.Controllers
@@ -18,33 +19,47 @@ namespace Skateboard_World.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Index( NGUOI_DUNG nguoidung)
         {
-            NGUOI_DUNG? user = _context.db_NGUOI_DUNG.Where(x=> x.TenTaiKhoan == nguoidung.TenTaiKhoan && x.MatKhau == nguoidung.MatKhau).FirstOrDefault();
+            NGUOI_DUNG? user = _context.db_NGUOI_DUNG.Where(x=> x.TenTaiKhoan == nguoidung.TenTaiKhoan).FirstOrDefault();
             
             if(user == null)
             {
+                TempData["DangNhap"] = "Tên Tài khoản không chính xác";
                 return RedirectToAction("Index", "DangNhap");
             }
-            else if (user.TrangThai == true)
+            else if ( user.TrangThai == true )
             {
-                if (user.PhanQuyen == true)
+                if(user.MatKhau == nguoidung.MatKhau)
                 {
-                    return RedirectToAction("Index", "Home");
+                    HttpContext.Response.Cookies.Append("UserID", user.MaND.ToString());
+                    HttpContext.Response.Cookies.Append("Power", user.PhanQuyen.ToString());
+                    //TempData["DangNhap_TC"] = "Đăng nhập thành công";
+                    if (user.PhanQuyen == true)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    if (user.PhanQuyen == false)
+                    {
+                        return RedirectToAction("Index", "USER_SAN_PHAM");
+                    }
                 }
-                if(user.PhanQuyen == false)
+                else
                 {
-                    return RedirectToAction("Index", "USER_SAN_PHAM");
+                    TempData["DangNhap"] = "Mật khẩu không chính xác";
                 }
+               
 
             }
             else
             {
-                
+                TempData["DangNhap"] = "Tài Khoản đã bị khóa";
             }
             return View();
 
-        }/*
+        }
+        /*
 
         [HttpPost]
         public IActionResult Index(string username, string password)

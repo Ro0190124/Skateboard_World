@@ -20,40 +20,42 @@
                                 <th class="product-remove">xóa</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach (var item in Model)
+                        <tbody style="vertical-align: middle">
+                            @if(Model != null)
                             {
-                                Console.WriteLine(item.SAN_PHAM.DS_HINH_ANH.Count());
-                                <tr>
-                                    <td class="product-thumbnail">
-                                       
-                                        @foreach (var image in item.SAN_PHAM.DS_HINH_ANH )
-                                        {
-                                            <img src="@image.MediaHinhAnh" width="200px" height="300px" alt="Image" />
-                                            break;
-                                        }
-                                    </td>
-                                    <td class="product-name">
-                                        <h2 class="h5 text-black">@item.SAN_PHAM.TenSP</h2>
-                                    </td>
-                                    <td>@item.SAN_PHAM.GiaBan.ToString("N0") đ</td>
-                                    <td>
-                                        <div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
-                                            <div class="input-group-prepend">
-                                                <button class="btn btn-outline-black decrease" type="button" data-item-id="@item.MaSP" data-quantity="@item.SoLuong">-</button>
+                                @foreach (var item in Model)
+                                {
+                                    Console.WriteLine(item.SAN_PHAM.DS_HINH_ANH.Count());
+                                    <tr>
+                                        <td class="product-thumbnail">
+
+                                            @foreach (var image in item.SAN_PHAM.DS_HINH_ANH)
+                                            {
+                                                <img src="@image.MediaHinhAnh" width="100px" height="100px" alt="Image" />
+                                                break;
+                                            }
+                                        </td>
+                                        <td class="product-name">
+                                            <h2 class="h5 text-black">@item.SAN_PHAM.TenSP</h2>
+                                        </td>
+                                        <td>@item.SAN_PHAM.GiaBan.ToString("N0") đ</td>
+                                        <td>
+                                            <div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
+                                                
+                                                <input type="number" value="@item.SoLuong" name="quantity" type="number" min="1" max="100" onchange="updateQuantity('@item.MaSP', this.value)">
+                                            
                                             </div>
-                                            <input type="text" class="form-control text-center quantity-amount" value="@item.SoLuong" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-outline-black increase" type="button" data-item-id="@item.MaSP" data-quantity="@item.SoLuong">+</button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>@{
-                                            double tong = item.SoLuong * item.SAN_PHAM.GiaBan;
-                                        } @tong.ToString("N0") đ</td>
-                                    <td><a href="#" onclick="deleteProduct('@item.MaSP')" class="btn btn-black btn-sm">X</a></td>
-                                </tr>
+                                        </td>
+                                        <td>`
+                                            @{
+                                                double tong = item.SoLuong * item.SAN_PHAM.GiaBan;
+                                            } @tong.ToString("N0") đ
+                                        </td>
+                                        <td><a href="#" onclick="deleteProduct('@item.MaSP')" class="btn btn-black btn-sm">X</a></td>
+                                    </tr>
+                                }
                             }
+                           
                         </tbody>
                     </table>
                 </div>
@@ -85,6 +87,10 @@
                                     @{
                                         int tongsp = 0;
                                         double tonggia = 0;
+                                        }
+                                    @if(Model != null)
+                                    {
+                                       
 
                                         for (int i = 0; i < Model.Count(); i++)
                                         {
@@ -94,8 +100,10 @@
 
                                         }
 
+                                    
+                                        @tongsp.ToString()
                                     }
-                                    @tongsp.ToString()
+                                    
                                 </strong>
                             </div>
                         </div>
@@ -125,7 +133,7 @@
 <script>
     function updateQuantity(itemId, newQuantity) {
         $.ajax({
-            url: '/GioHangH/UpdateQuantity',
+            url: '/CHI_TIET_GIO_HANG/UpdateQuantity',
             type: 'POST',
             data: { itemId: itemId, newQuantity: newQuantity },
             success: function (response) {
@@ -140,7 +148,7 @@
     }
     function deleteProduct(itemId) {
         $.ajax({
-            url: '/GioHangH/DeleteProduct',
+            url: '/CHI_TIET_GIO_HANG/Delete',
             type: 'POST',
             data: { itemId: itemId },
             success: function (response) {

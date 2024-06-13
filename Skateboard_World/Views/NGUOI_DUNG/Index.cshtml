@@ -59,7 +59,7 @@
                     @Html.DisplayFor(modelItem => item.SoDienThoai)
                 </td>
                 <td>
-                    @item.Email.Substring(0, Math.Min(item.Email.Length, 20))
+                    @item.Email?.Substring(0, Math.Min(item.Email.Length, 20))
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TenTaiKhoan)

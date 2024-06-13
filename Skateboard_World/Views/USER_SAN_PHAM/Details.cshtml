@@ -52,27 +52,43 @@
         <div class="col-md-6">
             <h1 class="display-4">@Model.TenSP</h1>
             
-            <h3 class="my-4">@Model.GiaBan đ</h3>
+            <h3 class="my-4">Giá bán:  @Model.GiaBan đ</h3>
             
             <!-- Product Options -->
            
             <!-- Quantity and Add to Cart Button -->
             <div class="form-group">
                 <label for="quantityInput">Số lượng</label>
-                <input type="number" class="form-control" id="quantityInput" value="1" style="    width: 70px;">
+                <input type="number" class="form-control" id="quantityInput" value="1" style="    width: 70px;" min="1" max="100">
             </div>
            </<br />
             <div class="form-group" style="margin-top: 20px;">
-                <button class="btn btn-primary btn-lg btn-block">Thêm Vào Giỏ</button>
-                <button class="btn btn-primary btn-lg btn-block">Mua Ngay</button>
+              
+                <a class="btn btn-primary btn-lg btn-error" onclick="addToCart(@Model.MaSP,  $('#quantityInput').val()) ">Thêm vào giỏ</a>
+                <form id="addToCartForm" method="post" asp-controller="CHI_TIET_GIO_HANG" asp-action="ThemVaoGioHang" style="display: none;">
+                    <input type="hidden" name="id" id="productId" />
+                    <input type="hidden" name="quantity" id="quantity" value="1" min="1" />
+                </form>
             </div>
-            
+            <h2>Mô Tả sản phẩm</h2>
+            <p>Mô tả: @Model.MoTa</p>
+
         </div>
-        <p>Mô tả: @Model.MoTa</p> 
+       
     </div>
    
 </div>
 
+<script>
+    function addToCart(productId, quantity) {
+        // Set the values of the hidden inputs in the form
+        document.getElementById('productId').value = productId;
+        document.getElementById('quantity').value = quantity;
+
+        // Submit the form
+        document.getElementById('addToCartForm').submit();
+    }
+</script>
 <style>
     
 
@@ -90,26 +106,7 @@
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $(".nav-link").click(function (e) {
-            e.preventDefault();
-
-            // Get the index from the data-index attribute
-            var index = $(this).find("img").data("index");
-            console.log("Clicked image index: ", index);
-            console.log("Hoạt động mà?");
-
-            // Get the image URL from the clicked image's src attribute
-            var imageUrl = $(this).find("img").attr("src");
-            console.log("Image URL: ", imageUrl);
-
-            // Update the selected image's src attribute
-            $("#selectedImage").attr("src", imageUrl);
-
-            // Optionally, update alt text or other attributes if needed
-            // $("#selectedImage").attr("alt", $(this).find("img").attr("alt"));
-        });
-    });
+  
 
 
 </script>

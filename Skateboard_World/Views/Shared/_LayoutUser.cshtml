@@ -8,18 +8,25 @@
     <title>@ViewBag.Title</title>
    
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="~/css/site.css" rel="stylesheet">
+    <link href="/css/site.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="~/lib/animate/animate.min.css" rel="stylesheet">
-    <link href="~/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
+    <!--Tbaó-->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/js/toastr.js/toastr.min.css" />
+    <script src="/js/toastr.js/toastr.min.js"></script>
+    
 </head>
 <body>
-   
+    <partial name="_Notification" />
     <!-- Navbar Start -->
     <div class="container-fluid sticky-top">
         <div class="container">
@@ -33,21 +40,30 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
-                        <a asp-action="Index" asp-controller="USER_SAN_PHAM" class="nav-item nav-link active">Trang Chủ</a>
-                        <a  href="about.html" class="nav-item nav-link">Sản Phẩm</a>
-                        <a href="product.html" class="nav-item nav-link">Liên Hệ</a>
+
+                         @{
+                            var currentController = ViewContext.RouteData.Values["controller"].ToString();
+                            var currentAction = ViewContext.RouteData.Values["action"].ToString();
+                        }
+                       
+
+
+                        <a asp-action="Index" asp-controller="USER_SAN_PHAM" class="nav-item nav-link @((currentAction == "Index" && currentController=="USER_SAN_PHAM") ? "active" : "")">Trang Chủ</a>
+                        <a asp-action="Product" asp-controller="USER_SAN_PHAM" class="nav-item nav-link @(currentAction == "Product" ? "active" : "")">Sản Phẩm</a>
+                        <a href="product.html" class="nav-item nav-link @(currentController == "SAN_PHAM" ? "active" : "")">Liên Hệ</a>
                         <div class="nav-item dropdown">
-                            <a class="nav-link " data-bs-toggle="dropdown">Tài Khoản</a>
+                            <a class="nav-link " data-bs-toggle="dropdown @(currentController == "NGUOI_DUNG" ? "active" : "")">Tài Khoản</a>
                             <div class="dropdown-menu bg-light mt-2">
-                                <a href="feature.html" class="dropdown-item">Đăng Nhập</a>
-                                <a href="how-to-use.html" class="dropdown-item">Đăng Ký</a>
+                                <a href="feature.html" class="dropdown-item">Thông tin tài khoản</a>
+                                <a asp-controller="DangNhap" asp-action="Index" class="dropdown-item">Đăng Nhập</a>
+                                <a asp-controller="DangNhap" asp-action="DangKi" class="dropdown-item">Đăng Ký</a>
                             </div>
                         </div>
-                        
+                        <a asp-controller="CHI_TIET_GIO_HANG" asp-action="Index" class="nav-item nav-link @(currentController == "CHI_TIET_GIO_HANG" ? "active" : "")">Giỏ Hàng</a>
+
                     </div>
 
-                    <a href="" class="btn btn-dark py-2 px-4 d-none d-lg-inline-block">Giỏ Hàng</a>
-                </div>
+                   </div>
             </nav>
         </div>
     </div>

@@ -1,6 +1,4 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿
 
 @{
     ViewData["Title"] = "Trang Chủ";
@@ -60,6 +58,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
+
                         <table class="table">
                             <thead class=" text-primary">
                             <th>
@@ -80,42 +79,41 @@
                             </th>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td>
-                                        <img src="https://centosy.vn/pictures/picfullsizes/2022/10/07/xmz1665112801.jpg" width="100px" height="100px" />
-                                    </td>
-                                    <td>
-                                        VÁN TRƯỢT SKATEBOARD 1100-10
-                                    </td>
-                                    <td>
-                                        7
-                                    </td>
+                                @{
 
-                                    <td class="text-primary">
-                                        799,000đ
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td>
-                                        <img src="https://centosy.vn/pictures/picfullsizes/2022/10/12/hkv1665570702.jpg" width="100px" height="100px" />
-                                    </td>
-                                    <td>
-                                        VÁN TRƯỢT SKATEBOARD JOCY 02
-                                    </td>
-                                    <td>
-                                        5
-                                    </td>
+                                    var spNoiBat = ViewData["SanPhamNoiBat"] as List<HINH_ANH_SAN_PHAM>;
+                                }
 
-                                    <td class="text-primary">
-                                        599,000đ
-                                    </td>
-                                </tr>
+                                <div class="owl-carousel testimonial-carousel wow fadeIn" data-wow-delay="0.1s">
+                                    @foreach (var item in spNoiBat)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.SanPham.MaSP
+                                            </td>
+                                            <td>
+                                                    @foreach (var image in item.HinhAnhList)
+                                                    {
+                                                        <img  width="100px" height="100px" src="@image.MediaHinhAnh" alt="">
+
+                                                        break;
+                                                    }
+                                            </td>
+                                            <td>
+                                                @item.SanPham.TenSP
+                                            </td>
+                                            <td>
+                                                @item.SanPham.SoLuong
+                                            </td>
+
+                                            <td class="text-primary">
+                                                @item.SanPham.GiaBan
+                                            </td>
+                                        </tr>
+
+                                    }
+                               </div>
+                              
                             </tbody>
                         </table>
                     </div>

@@ -163,7 +163,8 @@ img.animated.pulse {
     margin-top: -85px;
     padding-top: 12rem;
     padding-bottom: 6rem;
-    background: url(../img/bg.png) center center no-repeat;
+    /*background: url(../img/bg.png) center center no-repeat;*/ 
+    /* lam gi co cai file nay ????*/
     background-size: cover;
 }
 
@@ -210,7 +211,7 @@ img.animated.pulse {
 /*** Deal ***/
 .deal {
     position: relative;
-    background: url(../img/bg.png) center center no-repeat;
+    /*background: url(../img/bg.png) center center no-repeat;*/
     background-size: cover;
 }
 

@@ -1,4 +1,5 @@
-﻿@if (TempData["tb_DangKi_KhongThanhCong"] != null)
+﻿
+@if (TempData["tb_DangKi_KhongThanhCong"] != null)
 {
     <script>
 
@@ -51,6 +52,153 @@
 
         // Display Toastr notification
         toastr.success('@TempData["tb_DangKi_ThanhCong"]');
+    </script>
+
+}
+
+@if (TempData["DangNhap"] != null)
+{
+    <script>
+
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+
+        // Display Toastr notification
+        toastr.error('@TempData["DangNhap"]');
+    </script>
+
+}
+@if (TempData["DangNhap_User"] != null)
+{
+    <script>
+
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+
+        // Display Toastr notification
+        toastr.error('@TempData["DangNhap_User"]');
+    </script>
+
+}
+
+
+@if (TempData["tbThemVaoGioHang_ThatBai"] != null)
+{
+    <script>
+
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+
+        // Display Toastr notification
+        toastr.error('@TempData["tbThemVaoGioHang_ThatBai"]');
+    </script>
+
+}
+
+@if (TempData["tbThemVaoGioHang"] != null)
+{
+    <script>
+
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+
+        // Display Toastr notification
+        toastr.success('@TempData["tbThemVaoGioHang"]');
+    </script>
+
+}
+
+
+
+@if (TempData["DangNhap_TC"] != null)
+{
+    <script>
+
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+
+        // Display Toastr notification
+        toastr.success('@TempData["DangNhap_TC"]');
     </script>
 
 }

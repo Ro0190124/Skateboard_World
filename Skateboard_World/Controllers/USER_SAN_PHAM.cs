@@ -24,10 +24,30 @@ namespace Skateboard_World.Controllers
                 SanPham = p,
                 HinhAnhList = _context.db_DS_HINH_ANH.Where(h => h.MaSP == p.MaSP).ToList()
             }).ToList();
-            var sanPhamNoiBat = _context.db_CHI_TIET_GIO_HANG
-                .Include(x => x.SAN_PHAM).GroupBy(x => x.MaSP)
-                .Select(x => new SAN_PHAM { MaSP = x.Key, TenSP = x.First().SAN_PHAM.TenSP, GiaBan = x.First().SAN_PHAM.GiaBan, DS_HINH_ANH = x.First().SAN_PHAM.DS_HINH_ANH })
-                .Take(6).ToList();
+            /* var sanPhamNoiBat = _context.db_CHI_TIET_GIO_HANG
+                 .Include(x => x.SAN_PHAM).GroupBy(x => x.MaSP)
+                 .Select(x => new SAN_PHAM { MaSP = x.Key, TenSP = x.First().SAN_PHAM.TenSP, GiaBan = x.First().SAN_PHAM.GiaBan, DS_HINH_ANH = x.First().SAN_PHAM.DS_HINH_ANH })
+                 .Take(6).ToList();
+             var hinhAnhSanPhamNoiBat = sanPhamNoiBat.Select(p => new HINH_ANH_SAN_PHAM
+             {
+                 SanPham = p,
+                 HinhAnhList = _context.db_DS_HINH_ANH.Where(h => h.MaSP == p.MaSP).ToList()
+             }).ToList();
+             ViewData["SanPhamNoiBat"] = hinhAnhSanPhamNoiBat;*/
+            var tatcachitiet = _context.db_CHI_TIET_GIO_HANG.ToList();
+            Dictionary<int, int> sanpham_soluong = new Dictionary<int, int>();
+            foreach (var item in tatcachitiet)
+            {
+                if (sanpham_soluong.ContainsKey(item.MaSP))
+                {
+                    sanpham_soluong[item.MaSP] += item.SoLuong;
+                }
+                else
+                {
+                    sanpham_soluong.Add(item.MaSP, item.SoLuong);
+                }
+            }
+            var sanPhamNoiBat = sanpham_soluong.OrderByDescending(x => x.Value).Take(3).Select(x => _context.db_SAN_PHAM.Where(y => y.MaSP == x.Key).FirstOrDefault()).ToList();
             var hinhAnhSanPhamNoiBat = sanPhamNoiBat.Select(p => new HINH_ANH_SAN_PHAM
             {
                 SanPham = p,

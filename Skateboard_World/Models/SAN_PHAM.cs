@@ -12,7 +12,7 @@ namespace Skateboard_World.Models
         [MaxLength(100, ErrorMessage = "Tên sản phẩm không quá 100 kí tự")]
         [MinLength(5, ErrorMessage = "Tên sản phẩm không dưới 5 kí tự")]
         [Required(ErrorMessage = "Tên sản phẩm Không được trống")]
-        [RegularExpression(@"^[\p{L}a-zA-Z0-9\s]*$", ErrorMessage = "Tên sản phẩm không chứa kí tự đặc biệt")]
+
         [Display(Name = "Tên Sản Phẩm")]
         public string TenSP { get; set; }
 

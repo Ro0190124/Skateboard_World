@@ -22,31 +22,58 @@ namespace Skateboard_World.Controllers
         // GET: NGUOI_DUNG
         public async Task<IActionResult> Index()
         {
-            return View(await _context.db_NGUOI_DUNG.ToListAsync());
+            string? userID = HttpContext.Request.Cookies["UserID"];
+            if (userID != null)
+            {
+                return View(await _context.db_NGUOI_DUNG.Where(x=> x.TrangThai==true && x.PhanQuyen == true).ToListAsync());
+            }
+            else
+            {
+                return RedirectToAction("Index", "DangNhap");
+            }
+          
         }
 
         // GET: NGUOI_DUNG/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            string? userID = HttpContext.Request.Cookies["UserID"];
+            if (userID != null)
             {
-                return NotFound();
-            }
 
-            var nGUOI_DUNG = await _context.db_NGUOI_DUNG
-                .FirstOrDefaultAsync(m => m.MaND == id);
-            if (nGUOI_DUNG == null)
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var nGUOI_DUNG = await _context.db_NGUOI_DUNG
+                    .FirstOrDefaultAsync(m => m.MaND == id);
+                if (nGUOI_DUNG == null)
+                {
+                    return NotFound();
+                }
+
+                return View(nGUOI_DUNG);
+            }
+            else
             {
-                return NotFound();
+                return RedirectToAction("Index", "DangNhap");
             }
-
-            return View(nGUOI_DUNG);
         }
 
         // GET: NGUOI_DUNG/Create
         public IActionResult Create()
         {
-            return View();
+            string? userID = HttpContext.Request.Cookies["UserID"];
+            if (userID != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "DangNhap");
+            }
+           
         }
 
         // POST: NGUOI_DUNG/Create
@@ -69,17 +96,26 @@ namespace Skateboard_World.Controllers
         // GET: NGUOI_DUNG/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            string? userID = HttpContext.Request.Cookies["UserID"];
+            if (userID != null)
             {
-                return NotFound();
-            }
 
-            var nGUOI_DUNG = await _context.db_NGUOI_DUNG.FindAsync(id);
-            if (nGUOI_DUNG == null)
-            {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var nGUOI_DUNG = await _context.db_NGUOI_DUNG.FindAsync(id);
+                if (nGUOI_DUNG == null)
+                {
+                    return NotFound();
+                }
+                return View(nGUOI_DUNG);
             }
-            return View(nGUOI_DUNG);
+            else
+            {
+                return RedirectToAction("Index", "DangNhap");
+            }
         }
 
         // POST: NGUOI_DUNG/Edit/5
@@ -120,19 +156,28 @@ namespace Skateboard_World.Controllers
         // GET: NGUOI_DUNG/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            string? userID = HttpContext.Request.Cookies["UserID"];
+            if (userID != null)
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var nGUOI_DUNG = await _context.db_NGUOI_DUNG
-                .FirstOrDefaultAsync(m => m.MaND == id);
-            if (nGUOI_DUNG == null)
+                var nGUOI_DUNG = await _context.db_NGUOI_DUNG
+                    .FirstOrDefaultAsync(m => m.MaND == id);
+                if (nGUOI_DUNG == null)
+                {
+                    return NotFound();
+                }
+
+                return View(nGUOI_DUNG);
+
+            }
+            else
             {
-                return NotFound();
+                return RedirectToAction("Index", "DangNhap");
             }
-
-            return View(nGUOI_DUNG);
         }
 
         // POST: NGUOI_DUNG/Delete/5

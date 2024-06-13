@@ -23,40 +23,68 @@ namespace Skateboard_World.Controllers
         // GET: SAN_PHAM
         public async Task<IActionResult> Index()
         {
-            var products = await _context.db_SAN_PHAM.Where(x => x.TrangThai == true).ToListAsync();
-
-            var productWithImages = products.Select(p => new HINH_ANH_SAN_PHAM
+            string? userID = HttpContext.Request.Cookies["UserID"];
+            if (userID != null)
             {
-                SanPham = p,
-                HinhAnhList = _context.db_DS_HINH_ANH.Where(h => h.MaSP == p.MaSP).ToList()
-            }).ToList();
+                var products = await _context.db_SAN_PHAM.Where(x => x.TrangThai == true).ToListAsync();
 
-            return View(productWithImages);
+                var productWithImages = products.Select(p => new HINH_ANH_SAN_PHAM
+                {
+                    SanPham = p,
+                    HinhAnhList = _context.db_DS_HINH_ANH.Where(h => h.MaSP == p.MaSP).ToList()
+                }).ToList();
+
+                return View(productWithImages);
+            }
+            else
+            {
+                return RedirectToAction("Index", "DangNhap");
+            }
+           
         }
 
         // GET: SAN_PHAM/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            string? userID = HttpContext.Request.Cookies["UserID"];
+            if (userID != null)
             {
-                return NotFound();
-            }
 
-            var sAN_PHAM = await _context.db_SAN_PHAM
-                .Include(s => s.DS_HINH_ANH)
-                .FirstOrDefaultAsync(m => m.MaSP == id);
-            if (sAN_PHAM == null)
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var sAN_PHAM = await _context.db_SAN_PHAM
+                    .Include(s => s.DS_HINH_ANH)
+                    .FirstOrDefaultAsync(m => m.MaSP == id);
+                if (sAN_PHAM == null)
+                {
+                    return NotFound();
+                }
+
+                return View(sAN_PHAM);
+            }
+            else
             {
-                return NotFound();
+                return RedirectToAction("Index", "DangNhap");
             }
-
-            return View(sAN_PHAM);
+           
         }
 
         // GET: SAN_PHAM/Create
         public IActionResult Create()
         {
-            return View();
+            string? userID = HttpContext.Request.Cookies["UserID"];
+            if (userID != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "DangNhap");
+            }
+            
         }
 
         // POST: SAN_PHAM/Create
@@ -122,21 +150,30 @@ namespace Skateboard_World.Controllers
         // GET: SAN_PHAM/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            string? userID = HttpContext.Request.Cookies["UserID"];
+            if (userID != null)
             {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var sAN_PHAM = await _context.db_SAN_PHAM
+                    .Include(s => s.DS_HINH_ANH)
+                    .FirstOrDefaultAsync(m => m.MaSP == id);
+
+                if (sAN_PHAM == null)
+                {
+                    return NotFound();
+                }
+
+                return View(sAN_PHAM);
             }
-
-            var sAN_PHAM = await _context.db_SAN_PHAM
-                .Include(s => s.DS_HINH_ANH)
-                .FirstOrDefaultAsync(m => m.MaSP == id);
-
-            if (sAN_PHAM == null)
+            else
             {
-                return NotFound();
+                return RedirectToAction("Index", "DangNhap");
             }
-
-            return View(sAN_PHAM);
+           
         }
 
         // POST: SAN_PHAM/Edit/5
@@ -235,20 +272,30 @@ namespace Skateboard_World.Controllers
         // GET: SAN_PHAM/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            string? userID = HttpContext.Request.Cookies["UserID"];
+            if (userID != null)
             {
-                return NotFound();
-            }
-            var sAN_PHAM = await _context.db_SAN_PHAM
-                .Include(s => s.DS_HINH_ANH)
-                .FirstOrDefaultAsync(m => m.MaSP == id);
 
-            if (sAN_PHAM == null)
+                if (id == null)
+                {
+                    return NotFound();
+                }
+                var sAN_PHAM = await _context.db_SAN_PHAM
+                    .Include(s => s.DS_HINH_ANH)
+                    .FirstOrDefaultAsync(m => m.MaSP == id);
+
+                if (sAN_PHAM == null)
+                {
+                    return NotFound();
+                }
+
+                return View(sAN_PHAM);
+            }
+            else
             {
-                return NotFound();
+                return RedirectToAction("Index", "DangNhap");
             }
 
-            return View(sAN_PHAM);
         }
 
         // POST: SAN_PHAM/Delete/5
