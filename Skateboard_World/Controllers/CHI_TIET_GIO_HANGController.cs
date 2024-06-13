@@ -321,5 +321,57 @@ namespace Skateboard_World.Controllers
         {
             return _context.db_CHI_TIET_GIO_HANG.Any(e => e.MaCTGH == id);
         }
+
+       
+        public ActionResult DatHang()
+        {
+            //tìm giò hàng của người dùng đang sử dụng
+            var cookie = Request.Cookies["UserID"];
+            var gioHang = _context.db_GIO_HANG.Where(x => x.MaNguoiDung == int.Parse(cookie)).ToList(); // Trả về giỏ hàng của người dùng
+            var gioHangChuaCoTrongHoaDon = gioHang.FirstOrDefault(x => !_context.db_HOA_DON.Any(y => y.MaGioHang == x.MaGioHang)); // Trả về giỏ hàng của người dùng chưa có trong hóa đơn
+            if (gioHangChuaCoTrongHoaDon == null)
+            {
+                TempData["tbDatHangLoi"] = "Không có sản phẩm trong giò hàng";
+                return RedirectToAction("ChiTietGioHang", "GioHang");
+            }
+            else
+            {
+                // kiểm tra giỏ hàng có sản phẩm không
+                var chiTietGioHang = _context.db_CHI_TIET_GIO_HANG.FirstOrDefault(x => x.MaGioHang == gioHangChuaCoTrongHoaDon.MaGioHang);
+                if (chiTietGioHang == null)
+                {
+                    TempData["tbDatHangLoi"] = "Không có sản phẩm trong giò hàng";
+                    return RedirectToAction("ChiTietGioHang", "GioHang");
+                }
+                else
+                {
+                    //kiểm tra địa chỉ người dùng
+                    var nguoiDung = _context.db_NGUOI_DUNG.FirstOrDefault(x => x.MaND == int.Parse(cookie));
+                    if (nguoiDung.DiaChi == null)
+                    {
+                        TempData["tbDatHangLoi"] = "Vui lòng cập nhật địa chỉ trước khi đặt hàng";
+                        return RedirectToAction("ThongTinTK", "NguoiDung");
+                    }
+                    else
+                    {
+
+                        //tạo hóa đơn
+                        HOA_DON hoaDon = new HOA_DON();
+                        hoaDon.MaGioHang = gioHangChuaCoTrongHoaDon.MaGioHang;
+                        hoaDon.NgayTao = DateTime.Now;
+                        hoaDon.TrangThai = 0;
+                      
+                        
+                      
+                        _context.db_HOA_DON.Add(hoaDon);
+                        _context.SaveChanges();
+                        TempData["tbDatHang"] = "Đặt hàng thành công!";
+                    }
+                }
+            }
+            return RedirectToAction("Index", "USER_SAN_PHAM");
+           
+        }
+
     }
 }
