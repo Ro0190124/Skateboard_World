@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Skateboard_World.Data;
 using Skateboard_World.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Skateboard_World.Controllers
 {
@@ -19,14 +20,22 @@ namespace Skateboard_World.Controllers
         {
             _context = context;
         }
-
+        
         // GET: SAN_PHAM
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? search)
         {
             string? userID = HttpContext.Request.Cookies["UserID"];
             if (userID != null)
             {
-                var products = await _context.db_SAN_PHAM.Where(x => x.TrangThai == true).ToListAsync();
+                var products = await _context.db_SAN_PHAM.ToListAsync();
+                if (search == null)
+                {
+                     products = await _context.db_SAN_PHAM.Where(x => x.TrangThai == true).ToListAsync();
+                }
+                else
+                {
+                    products = await _context.db_SAN_PHAM.Where(x => x.TenSP.Contains(search) && x.TrangThai == true).ToListAsync();
+                }
 
                 var productWithImages = products.Select(p => new HINH_ANH_SAN_PHAM
                 {

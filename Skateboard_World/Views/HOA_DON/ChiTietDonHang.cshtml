@@ -1,0 +1,194 @@
+﻿@model IEnumerable<Skateboard_World.Models.CHI_TIET_GIO_HANG>
+
+@{
+    ViewData["Title"] = "Chi Tiết Hóa Đơn"; 
+    if (TempData["PhanQuyen"] != null && (TempData["PhanQuyen"] as bool?) == true)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    }
+}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+           Thông tin đơn hàng
+        </div>
+        @{
+            var user = TempData["NguoiNhan"] as Skateboard_World.Models.NGUOI_DUNG;
+        }
+        <div class="card-body">
+            @if(user != null)
+            {
+                <h5 class="card-title">Tên người dùng:  <span id="product-name">@user.TenND</span></h5>
+                <p class="card-text">
+                    <strong>Số điện thoại: </strong> <span id="product-quantity">@user.SoDienThoai</span><br>
+                    <strong>Địa Chỉ: </strong> <span id="total-price">@user.DiaChi</span>
+                </p>
+            }
+            
+        </div>
+       <div class="card-body">
+
+            <div class="site-blocks-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="product-thumbnail">Hình ảnh</th>
+                            <th class="product-name">Tên sản phẩm</th>
+                            <th class="product-price">Giá</th>
+                            <th class="product-quantity">Số lượng</th>
+                            <th class="product-total">Tổng</th>
+                        </tr>
+                    </thead>
+                    <tbody style="vertical-align: middle">
+                        @if (Model != null)
+                        {
+                            @foreach (var item in Model)
+                            {
+                                Console.WriteLine(item.SAN_PHAM.DS_HINH_ANH.Count());
+                                <tr>
+                                    <td class="product-thumbnail">
+
+                                        @foreach (var image in item.SAN_PHAM.DS_HINH_ANH)
+                                        {
+                                            <img src="@image.MediaHinhAnh" width="100px" height="100px" alt="Image" />
+                                            break;
+                                        }
+                                    </td>
+                                    <td class="product-name">
+                                        <h2 class="h5 text-black">@item.SAN_PHAM.TenSP</h2>
+                                    </td>
+                                    <td>@item.SAN_PHAM.GiaBan.ToString("N0") đ</td>
+                                    <td>
+                                        @item.SoLuong
+                                    </td>
+                                    <td>
+
+                                        @{
+                                            double tong = item.SoLuong * item.SAN_PHAM.GiaBan;
+                                        } @tong.ToString("N0") đ
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-md-6 pl-5">
+                    <div class="row mb-5">
+                        <div class="row justify-content-start">
+                            <div class="form-group">
+                                <label for="ghiChu">Ghi chú</label>
+                                <p>@TempData["GhiChu"]</p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 pl-5">
+                    <div class="row justify-content-end">
+                        <div class="col-md-7">
+                            <div class="row">
+                                <div class="col-md-12 text-right border-bottom mb-5">
+                                    <h3 class="text-black h4 text-uppercase">Tổng giỏ hàng</h3>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <span class="text-black">Số lượng</span>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <strong class="text-black">
+                                        @{
+                                            int tongsp = 0;
+                                            double tonggia = 0;
+                                        }
+                                        @if (Model != null)
+                                        {
+
+
+                                            for (int i = 0; i < Model.Count(); i++)
+                                            {
+                                                var item = Model.ElementAt(i);
+                                                tongsp = tongsp + item.SoLuong;
+                                                tonggia += item.SAN_PHAM.GiaBan * item.SoLuong;
+
+                                            }
+
+
+                                            @tongsp.ToString()
+                                        }
+
+                                    </strong>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <div class="col-md-6">
+                                    <span class="text-black">Tổng giá</span>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <strong class="text-black">@tonggia.ToString("N0") đ</strong>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                @if(TempData["TrangThai"] != null)
+                                {
+                                    <div class="col-md-12">
+
+                                        @if (TempData["TrangThai"].ToString() == "0")
+                                        {
+                                            @if(TempData["PhanQuyen"] != null && (TempData["PhanQuyen"] as bool?) == true){
+                                                <a class="btn btn-primary " asp-controller="HOA_DON" asp-action="XacNhan" asp-route-id="@TempData["MaHoaDon"]"> Xác Nhận</a>
+                                            }
+                                            
+                                            <a class="btn btn-danger" asp-controller="HOA_DON" asp-action="Huy" asp-route-id="@TempData["MaHoaDon"]">Hủy</a>
+                                        }
+                                        @if (TempData["TrangThai"].ToString() == "1")
+                                        {
+                                            @if (TempData["PhanQuyen"] != null && (TempData["PhanQuyen"] as bool?) == true)
+                                            {
+                                                <a class="btn btn-primary " asp-controller="HOA_DON" asp-action="GiaoHang" asp-route-id="@TempData["MaHoaDon"]"> Giao Hàng</a>
+                                            }
+
+                                            
+                                            <a class="btn btn-danger" asp-controller="HOA_DON" asp-action="Huy" asp-route-id="@TempData["MaHoaDon"]">Hủy</a>
+                                        }
+                                        @if (TempData["TrangThai"].ToString() == "2")
+                                        {
+                                            @if (TempData["PhanQuyen"] != null && (TempData["PhanQuyen"] as bool?) == true)
+                                            {
+                                               
+                                            }
+                                            else
+                                            {
+                                                <a class="btn btn-primary " asp-controller="HOA_DON" asp-action="DaGiao" asp-route-id="@TempData["MaHoaDon"]"> Đã nhận </a>
+                                            }
+                                          
+                                        }
+                                        @if (TempData["TrangThai"].ToString() == "3")
+                                        {
+                                            
+                                        }
+                                        @if (TempData["TrangThai"].ToString() == "4")
+                                        {
+
+                                        }
+
+                                    </div>
+                                }
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       </div>
+    </div>
+</div>

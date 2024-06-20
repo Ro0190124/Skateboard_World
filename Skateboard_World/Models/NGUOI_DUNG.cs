@@ -2,7 +2,7 @@
 
 namespace Skateboard_World.Models
 {
-    public class NGUOI_DUNG
+    public class NGUOI_DUNG: IValidatableObject
     {
         [Key]
         public int MaND { get; set; }
@@ -48,7 +48,26 @@ namespace Skateboard_World.Models
         [MinLength(5, ErrorMessage = "Địa chỉ không dưới 5 kí tự")]
         [Display(Name = "Địa Chỉ")]
         public string? DiaChi { get; set; }
+        [Display(Name = "Phân Quyền")]
         public bool PhanQuyen { get; set; }//true = admin , false = nguoidung
+        [Display(Name = "Trạng Thái")]
         public bool TrangThai { get; set; } = true; //true = ton tai , false = nghi;
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (NgaySinh.HasValue)
+            {
+                var today = DateTime.Today;
+                var age = today.Year - NgaySinh.Value.Year;
+                if (NgaySinh.Value.Date > today.AddYears(-age)) age--;
+
+                if (age < 18)
+                {
+                    yield return new ValidationResult(
+                        "Ngày sinh phải đủ 18 tuổi so với ngày hiện tại.",
+                        new[] { nameof(NgaySinh) }
+                    );
+                }
+            }
+        }
     }
 }

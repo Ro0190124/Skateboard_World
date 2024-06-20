@@ -6,23 +6,24 @@
 
 <div class="container-fluid">
     <div class="row">
+        @{
+            var dot = ViewData["DOT"] as DOT;
+        }
         <div class="col-xl-6 col-lg-12">
             <div class="card card-chart">
                 <div class="card-header card-header-success">
                     <div class="ct-chart" id="dailySalesChart"></div>
                 </div>
                 <div class="card-body">
-                    <h4 class="card-title">Tổng Đơn Hôm nay</h4>
+                    <h4 class="card-title">Tổng Đơn Hôm Nay</h4>
                     <p class="card-category">
                         <h4 style="color: limegreen">
-                            1 đơn
+                           @dot.TotalOrders
                         </h4>
                     </p>
                 </div>
                 <div class="card-footer">
-                    <div class="stats">
-                        <i class="material-icons">access_time</i> Vừa cập nhật
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -32,17 +33,15 @@
                     <div class="ct-chart" id="websiteViewsChart"></div>
                 </div>
                 <div class="card-body">
-                    <h4 class="card-title">Doanh Thu Tháng</h4>
+                    <h4 class="card-title">Doanh Thu Hôm Nay </h4>
                     <p class="card-category">
                         <h4 style="color: red">
-                            30,000,000 đ
+                            @dot.TotalRevenue.ToString("N0") đ
                         </h4>
                     </p>
                 </div>
                 <div class="card-footer">
-                    <div class="stats">
-                        <i class="material-icons">access_time</i> Cập nhật hôm nay
-                    </div>
+                   
                 </div>
             </div>
         </div>
@@ -80,7 +79,7 @@
                             </thead>
                             <tbody>
                                 @{
-
+                                    var sanPham = Model;
                                     var spNoiBat = ViewData["SanPhamNoiBat"] as List<HINH_ANH_SAN_PHAM>;
                                 }
 
@@ -103,11 +102,11 @@
                                                 @item.SanPham.TenSP
                                             </td>
                                             <td>
-                                                @item.SanPham.SoLuong
+                                                @item.TotalQuantitySold
                                             </td>
 
                                             <td class="text-primary">
-                                                @item.SanPham.GiaBan
+                                                @item.SanPham.GiaBan.ToString("N0")
                                             </td>
                                         </tr>
 

@@ -4,12 +4,31 @@
     ViewData["Title"] = "Sản Phẩm";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
-<div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
+
+@* <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
     <h1 class="text-primary mb-3" style="color: red"><span class="fw-light text-dark">Ván trượt</span> Mới</h1>
     <p class="mb-5"> </p>
+</div> *@
+<div class="row mb-4">
+    <!-- Search Form -->
+    <form method="get" class="col-md-8 d-flex">
+        <input type="text" name="searchString" class="form-control me-2" placeholder="Tìm kiếm sản phẩm..." value="@ViewContext.HttpContext.Request.Query["searchString"]" />
+        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+    </form>
+
+    <!-- Sort Filter Form -->
+    <form method="get" class="col-md-4 d-flex justify-content-end">
+        <select name="sortOrder" class="form-select me-2">
+            <option value="">Sắp xếp theo</option>
+            <option value="name_asc">Tên: A-Z</option>
+            <option value="name_desc" >Tên: Z-A</option>
+            <option value="price_asc" >Giá: Thấp đến Cao</option>
+            <option value="price_desc">Giá: Cao đến Thấp</option>
+        </select>
+        <button type="submit" class="btn btn-primary">Sắp xếp</button>
+    </form>
 </div>
 <div class="row g-4">
-
     @foreach (var item in Model)
     {
         <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
@@ -25,20 +44,20 @@
                     <small class="fa fa-star text-primary"></small>
                     <small class="fa fa-star text-primary"></small>
                     <small class="fa fa-star text-primary"></small>
-                    <small>(99)</small>
+                   
                 </div>
                 <a asp-action="Details" asp-route-id="@item.SanPham.MaSP" asp-controller="USER_SAN_PHAM" class="h6 d-inline-block mb-2">@item.SanPham.TenSP</a>
                 <h5 class="text-primary mb-3">@item.SanPham.GiaBan đ</h5>
-                <a class="btn btn-outline-primary px-3" onclick="addToCart(@item.SanPham.MaSP, 1) ">Thêm Vào Giò</a>
+                <a class="btn btn-outline-primary px-3" onclick="addToCart(@item.SanPham.MaSP, 1)">Thêm Vào Giò</a>
                 <form id="addToCartForm" method="post" asp-controller="CHI_TIET_GIO_HANG" asp-action="ThemVaoGioHang" style="display: none;">
                     <input type="hidden" name="id" id="productId" />
                     <input type="hidden" name="quantity" id="quantity" value="1" min="1" />
                 </form>
             </div>
         </div>
-
     }
 </div>
+
 <script>
     function addToCart(productId, quantity) {
         // Set the values of the hidden inputs in the form

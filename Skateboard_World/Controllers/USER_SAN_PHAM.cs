@@ -47,11 +47,18 @@ namespace Skateboard_World.Controllers
                     sanpham_soluong.Add(item.MaSP, item.SoLuong);
                 }
             }
-            var sanPhamNoiBat = sanpham_soluong.OrderByDescending(x => x.Value).Take(3).Select(x => _context.db_SAN_PHAM.Where(y => y.MaSP == x.Key).FirstOrDefault()).ToList();
+            var sanPhamNoiBat = sanpham_soluong.OrderByDescending(x => x.Value).Take(3)
+                .Select(x => new
+                {
+                    Product = _context.db_SAN_PHAM.FirstOrDefault(y => y.MaSP == x.Key),
+                    TotalQuantitySold = x.Value
+                })
+                .ToList();
             var hinhAnhSanPhamNoiBat = sanPhamNoiBat.Select(p => new HINH_ANH_SAN_PHAM
             {
-                SanPham = p,
-                HinhAnhList = _context.db_DS_HINH_ANH.Where(h => h.MaSP == p.MaSP).ToList()
+                SanPham = p.Product,
+                HinhAnhList = _context.db_DS_HINH_ANH.Where(h => h.MaSP == p.Product.MaSP).ToList(),
+                TotalQuantitySold = p.TotalQuantitySold
             }).ToList();
             ViewData["SanPhamNoiBat"] = hinhAnhSanPhamNoiBat;
             return View(productWithImages);
@@ -82,9 +89,32 @@ namespace Skateboard_World.Controllers
 
             return View(sAN_PHAM);
         }
-        public IActionResult Product()
+        public IActionResult Product(string sortOrder, string searchString)
         {
-            var products = _context.db_SAN_PHAM.Where(x => x.TrangThai == true).ToList();
+            var products = _context.db_SAN_PHAM.Where(x => x.TrangThai == true).AsQueryable();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(p => p.TenSP.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_asc":
+                    products = products.OrderBy(p => p.TenSP);
+                    break;
+                case "name_desc":
+                    products = products.OrderByDescending(p => p.TenSP);
+                    break;
+                case "price_asc":
+                    products = products.OrderBy(p => p.GiaBan);
+                    break;
+                case "price_desc":
+                    products = products.OrderByDescending(p => p.GiaBan);
+                    break;
+                default:
+                    break;
+            }
 
             var productWithImages = products.Select(p => new HINH_ANH_SAN_PHAM
             {
@@ -94,5 +124,6 @@ namespace Skateboard_World.Controllers
 
             return View(productWithImages);
         }
+
     }
 }

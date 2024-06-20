@@ -5,5 +5,6 @@
         public SAN_PHAM SanPham { get; set; }
         public List<DS_HINH_ANH> HinhAnhList { get; set; }
         public List<IFormFile> NewImages { get; set; }
+        public int? TotalQuantitySold { get; set; }
     }
 }

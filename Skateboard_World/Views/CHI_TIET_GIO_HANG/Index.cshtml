@@ -7,7 +7,7 @@
 <div class="untree_co-section before-footer-section">
     <div class="container">
         <div class="row mb-5">
-            <form class="col-md-12" method="post">
+            <form class="col-md-12" method="post" asp-action="DatHang" asp-controller="CHI_TIET_GIO_HANG">
                 <div class="site-blocks-table">
                     <table class="table">
                         <thead>
@@ -21,14 +21,12 @@
                             </tr>
                         </thead>
                         <tbody style="vertical-align: middle">
-                            @if(Model != null)
+                            @if (Model != null)
                             {
                                 @foreach (var item in Model)
                                 {
-                                    Console.WriteLine(item.SAN_PHAM.DS_HINH_ANH.Count());
                                     <tr>
                                         <td class="product-thumbnail">
-
                                             @foreach (var image in item.SAN_PHAM.DS_HINH_ANH)
                                             {
                                                 <img src="@image.MediaHinhAnh" width="100px" height="100px" alt="Image" />
@@ -41,12 +39,10 @@
                                         <td>@item.SAN_PHAM.GiaBan.ToString("N0") đ</td>
                                         <td>
                                             <div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
-                                                
-                                                <input type="number" value="@item.SoLuong" name="quantity" type="number" min="1" max="100" onchange="updateQuantity('@item.MaSP', this.value)">
-                                            
+                                                <input type="number" value="@item.SoLuong" name="quantity" min="1" max="100" onchange="updateQuantity('@item.MaSP', this.value)">
                                             </div>
                                         </td>
-                                        <td>`
+                                        <td>
                                             @{
                                                 double tong = item.SoLuong * item.SAN_PHAM.GiaBan;
                                             } @tong.ToString("N0") đ
@@ -55,81 +51,72 @@
                                     </tr>
                                 }
                             }
-                           
                         </tbody>
                     </table>
                 </div>
-            </form>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="row mb-5">
-                    @* <div class="col-md-6">
-                        <a class="btn btn-outline-black btn-sm btn-block" asp-controller="CTSanPham" asp-action="Index">Tiếp tục mua sắm</a>
-                    </div> *@
-                </div>
-            </div>
-            <div class="col-md-6 pl-5">
-                <div class="row justify-content-end">
-                    <div class="col-md-7">
-                        <div class="row">
-                            <div class="col-md-12 text-right border-bottom mb-5">
-                                <h3 class="text-black h4 text-uppercase">Tổng giỏ hàng</h3>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <span class="text-black">Số lượng</span>
-                            </div>
-                            <div class="col-md-6 text-right">
-                                <strong class="text-black">
-                                    @{
-                                        int tongsp = 0;
-                                        double tonggia = 0;
-                                        }
-                                    @if(Model != null)
-                                    {
-                                       
-
-                                        for (int i = 0; i < Model.Count(); i++)
-                                        {
-                                            var item = Model.ElementAt(i);
-                                            tongsp = tongsp + item.SoLuong;
-                                            tonggia += item.SAN_PHAM.GiaBan * item.SoLuong;
-
-                                        }
-
-                                    
-                                        @tongsp.ToString()
-                                    }
-                                    
-                                </strong>
-                            </div>
-                        </div>
+                <div class="row">
+                    <div class="col-md-6">
                         <div class="row mb-5">
-                            <div class="col-md-6">
-                                <span class="text-black">Tổng giá</span>
-                            </div>
-                            <div class="col-md-6 text-right">
-                                <strong class="text-black">@tonggia.ToString("N0") đ</strong>
+                            <div class="row justify-content-start">
+                                <div class="form-group">
+                                    <label for="ghiChu">Ghi chú</label>
+                                    <textarea class="form-control" id="ghiChu" name="ghiChu" rows="3"></textarea>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <a class="btn btn-primary " asp-controller="CHI_TIET_GIO_HANG" asp-action="DatHang">Đặt Hàng</a>
-
+                    </div>
+                    <div class="col-md-6 pl-5">
+                        <div class="row justify-content-end">
+                            <div class="col-md-7">
+                                <div class="row">
+                                    <div class="col-md-12 text-right border-bottom mb-5">
+                                        <h3 class="text-black h4 text-uppercase">Tổng giỏ hàng</h3>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <span class="text-black">Số lượng</span>
+                                    </div>
+                                    <div class="col-md-6 text-right">
+                                        <strong class="text-black">
+                                            @{
+                                                int tongsp = 0;
+                                                double tonggia = 0;
+                                            }
+                                            @if (Model != null)
+                                            {
+                                                for (int i = 0; i < Model.Count(); i++)
+                                                {
+                                                    var item = Model.ElementAt(i);
+                                                    tongsp = tongsp + item.SoLuong;
+                                                    tonggia += item.SAN_PHAM.GiaBan * item.SoLuong;
+                                                }
+                                                @tongsp.ToString()
+                                            }
+                                        </strong>
+                                    </div>
+                                </div>
+                                <div class="row mb-5">
+                                    <div class="col-md-6">
+                                        <span class="text-black">Tổng giá</span>
+                                    </div>
+                                    <div class="col-md-6 text-right">
+                                        <strong class="text-black">@tonggia.ToString("N0") đ</strong>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-primary">Đặt Hàng</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
-
-
 
 <script>
     function updateQuantity(itemId, newQuantity) {
@@ -139,7 +126,6 @@
             data: { itemId: itemId, newQuantity: newQuantity },
             success: function (response) {
                 console.log('Số lượng đã được cập nhật thành công.');
-                // Reload lại trang sau khi cập nhật thành công
                 location.reload();
             },
             error: function (xhr, status, error) {
@@ -154,7 +140,6 @@
             data: { itemId: itemId },
             success: function (response) {
                 console.log('Sản phẩm đã được xóa khỏi giỏ hàng.');
-                // Reload lại trang sau khi xóa sản phẩm thành công
                 location.reload();
             },
             error: function (xhr, status, error) {
@@ -162,5 +147,4 @@
             }
         });
     }
-
 </script>

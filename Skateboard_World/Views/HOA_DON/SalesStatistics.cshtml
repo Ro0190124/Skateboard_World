@@ -1,0 +1,40 @@
+﻿@model DOT
+@{
+    ViewData["Title"] = "Sales Statistics";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container mt-5">
+    <h2>Sales Statistics</h2>
+    <form method="get" class="row g-3 mb-4">
+        <div class="col-md-4">
+            <label for="fromDate" class="form-label">From Date</label>
+            <input type="date" class="form-control" id="fromDate" name="fromDate" />
+        </div>
+        <div class="col-md-4">
+            <label for="toDate" class="form-label">To Date</label>
+            <input type="date" class="form-control" id="toDate" name="toDate" />
+        </div>
+        <div class="col-md-4 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Total Orders</div>
+                <div class="card-body">
+                    <h5 class="card-title">@Model.TotalOrders</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-header">Total Revenue</div>
+                <div class="card-body">
+                    <h5 class="card-title">@Model.TotalRevenue.ToString("C")</h5> <!-- Hiển thị tổng doanh thu dưới dạng tiền tệ -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

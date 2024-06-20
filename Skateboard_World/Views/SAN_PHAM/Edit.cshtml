@@ -35,7 +35,7 @@
                 <textarea asp-for="MoTa" class="form-control"></textarea>
                 <span asp-validation-for="MoTa" class="text-danger"></span>
             </div>
-            <label>Hình ảnh hiện tại</label>
+            <label>Hình ảnh hiện tại ( chọn vào hình ảnh để xóa)</label>
             <div id="currentImages">
                 @if (Model.DS_HINH_ANH != null && Model.DS_HINH_ANH.Any())
                 {
@@ -59,7 +59,7 @@
             <div class="form-group" id="reloadImage"></div>
             <div>
                 <input type="submit" value="Sửa" class="btn btn-success" />
-                <a asp-action="Index"><button class="btn btn-primary">Trở về</button></a>
+                <a asp-action="Index" class="btn btn-primary"> Trở về</a>
             </div>
             <div>
                 

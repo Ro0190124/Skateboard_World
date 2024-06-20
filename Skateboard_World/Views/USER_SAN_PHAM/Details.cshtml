@@ -31,13 +31,41 @@
 
                                 </li>
 
-                                Console.WriteLine(img.Index)  ;
                             }
+                          @*   <button onclick="previous()">&lt;</button>
+                            <img id="im1" src="" width="200" height="200">
+                            <img id="im2" src="" width="200" height="200">
+                            <img id="im3" src="" width="200" height="200">
+                            <img id="im4" src="" width="200" height="200">
+                            <button onclick="next()">&gt;</button> *@
                         }
                         else
                         {
                             <p>Không có hình ảnh</p>
                         }
+                        <script>
+                            let current_index = 0;
+                            let fetch_images = () => {
+                                let num = 0;
+                                for (let i = current_index; i < current_index + 4; i++) {
+                                    num = num + 1;
+                                    let img = document.getElementById(`im${num}`);
+                                    img.src = `${i}.jpg`;
+                                }
+                            }
+                            let previous = () => {
+                                if (current_index > 0) {
+                                    current_index -= 1;
+                                    fetch_images();
+                                }
+                            }
+                            let next = () => {
+                                if (current_index < 6) {
+                                    current_index += 1;
+                                    fetch_images();
+                                }
+                            }
+                        </script>
                     </ul>
                     <div class="tab-pane col-9 fade show active" id="tab1" role="tabpanel">
                         <div class="modal_tab_img">

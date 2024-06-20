@@ -50,12 +50,13 @@
 
                         <a asp-action="Index" asp-controller="USER_SAN_PHAM" class="nav-item nav-link @((currentAction == "Index" && currentController=="USER_SAN_PHAM") ? "active" : "")">Trang Chủ</a>
                         <a asp-action="Product" asp-controller="USER_SAN_PHAM" class="nav-item nav-link @(currentAction == "Product" ? "active" : "")">Sản Phẩm</a>
-                        <a href="product.html" class="nav-item nav-link @(currentController == "SAN_PHAM" ? "active" : "")">Liên Hệ</a>
+                 
+                 
                         <div class="nav-item dropdown">
                             <a class="nav-link " data-bs-toggle="dropdown @(currentController == "NGUOI_DUNG" ? "active" : "")">Tài Khoản</a>
                             <div class="dropdown-menu bg-light mt-2">
-                                <a href="feature.html" class="dropdown-item">Thông tin tài khoản</a>
-                                <a href="feature.html" class="dropdown-item">Đơn hàng</a>
+                                <a asp-controller="NGUOI_DUNG" asp-action="User_Information" class="dropdown-item">Thông tin tài khoản</a>
+                                <a asp-controller="HOA_DON" asp-action="Admin_Index" class="dropdown-item">Đơn hàng</a>
                                 <a asp-controller="DangNhap" asp-action="Index" class="dropdown-item">Đăng Nhập</a>
                                 <a asp-controller="DangNhap" asp-action="DangKi" class="dropdown-item">Đăng Ký</a>
                             </div>
@@ -160,3 +161,8 @@
 </body>
 </html>
 
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

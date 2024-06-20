@@ -24,7 +24,8 @@ namespace Skateboard_World.Controllers
         {
             NGUOI_DUNG? user = _context.db_NGUOI_DUNG.Where(x=> x.TenTaiKhoan == nguoidung.TenTaiKhoan).FirstOrDefault();
             
-            if(user == null)
+            
+            if (user == null)
             {
                 TempData["DangNhap"] = "Tên Tài khoản không chính xác";
                 return RedirectToAction("Index", "DangNhap");
@@ -36,6 +37,7 @@ namespace Skateboard_World.Controllers
                     HttpContext.Response.Cookies.Append("UserID", user.MaND.ToString());
                     HttpContext.Response.Cookies.Append("Power", user.PhanQuyen.ToString());
                     //TempData["DangNhap_TC"] = "Đăng nhập thành công";
+
                     if (user.PhanQuyen == true)
                     {
                         return RedirectToAction("Index", "Home");

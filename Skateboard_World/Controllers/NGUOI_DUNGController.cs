@@ -20,12 +20,28 @@ namespace Skateboard_World.Controllers
         }
 
         // GET: NGUOI_DUNG
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? search)
         {
             string? userID = HttpContext.Request.Cookies["UserID"];
             if (userID != null)
             {
-                return View(await _context.db_NGUOI_DUNG.Where(x=> x.TrangThai==true && x.PhanQuyen == true).ToListAsync());
+                if(search != null)
+                {
+                    return View(await _context.db_NGUOI_DUNG
+                        .Where(
+                        x => x.TenND.Contains(search) || 
+                        x.TenTaiKhoan.Contains(search) ||
+                        x.SoDienThoai.Contains(search) ||
+                        x.Email.Contains(search) &&
+                        x.TrangThai == true && 
+                        x.PhanQuyen == true).ToListAsync());
+                }
+                else
+                {
+                    return View(await _context.db_NGUOI_DUNG.Where(x => x.TrangThai == true && x.PhanQuyen == true).ToListAsync());
+
+                }
+
             }
             else
             {
@@ -86,7 +102,12 @@ namespace Skateboard_World.Controllers
             if (ModelState.IsValid)
             {
                 nGUOI_DUNG.PhanQuyen = true;
+                if(nGUOI_DUNG.NgaySinh == null)
+                {
+                    nGUOI_DUNG.NgaySinh = new DateTime(2001, 01, 01);
+                }
                 _context.Add(nGUOI_DUNG);
+                TempData["create_Success"] = "Thêm người dùng thành công";
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -134,6 +155,7 @@ namespace Skateboard_World.Controllers
             {
                 try
                 {
+                    nGUOI_DUNG.PhanQuyen = true;
                     _context.Update(nGUOI_DUNG);
                     await _context.SaveChangesAsync();
                 }
@@ -198,6 +220,70 @@ namespace Skateboard_World.Controllers
         private bool NGUOI_DUNGExists(int id)
         {
             return _context.db_NGUOI_DUNG.Any(e => e.MaND == id);
+        }
+
+
+
+        public async Task<IActionResult> User_Information()
+        {
+            string? userID = HttpContext.Request.Cookies["UserID"];
+            if (userID != null)
+            {
+
+                if (userID == null)
+                {
+                    return NotFound();
+                }
+
+                var nGUOI_DUNG = await _context.db_NGUOI_DUNG.FindAsync(int.Parse(userID));
+
+                if (nGUOI_DUNG == null)
+                {
+                    return NotFound();
+                }
+                return View(nGUOI_DUNG);
+            }
+            else
+            {
+                return RedirectToAction("Index", "DangNhap");
+            }
+        }
+
+        // POST: NGUOI_DUNG/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> User_Information(int id,[Bind("MaND,TenND,SoDienThoai,Email,TenTaiKhoan,MatKhau,NgaySinh,DiaChi,PhanQuyen,TrangThai")] NGUOI_DUNG nGUOI_DUNG)
+        {
+           
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(nGUOI_DUNG);
+                    await _context.SaveChangesAsync();
+                    TempData["update_Success"] = "Cập nhật thông tin thành công";
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!NGUOI_DUNGExists(nGUOI_DUNG.MaND))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+            else
+            {
+
+                TempData["update_Fail"] = "Cập nhật thông tin thất bại";
+            }
+            return View(nGUOI_DUNG);
         }
     }
 }

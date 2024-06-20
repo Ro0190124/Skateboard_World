@@ -1,0 +1,135 @@
+﻿@model IEnumerable<HOA_DON>
+
+@{
+    ViewData["Title"] = "Hóa Đơn"; 
+    if (TempData["PhanQuyen"] != null && (TempData["PhanQuyen"] as bool?) == true)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    }
+}
+
+<div class="container mt-5">
+    <div class="col-8">
+        @{
+            var currentController = ViewContext.RouteData.Values["controller"].ToString();
+            var currentAction = ViewContext.RouteData.Values["action"].ToString();
+        }
+
+        <div class="d-flex justify-content-between actiDH">
+
+            <a asp-controller="HOA_DON" asp-action="Admin_Index" asp-route-value="0">
+                <button class="btn btn-primary @(TempData["currentValue"]?.ToString() == "0" ? "active" : "")">Chờ xác nhận</button>
+            </a>
+            <a asp-controller="HOA_DON" asp-action="Admin_Index" asp-route-value="1">
+                <button class="btn btn-primary @(TempData["currentValue"]?.ToString() == "1" ? "active" : "")">Chờ giao</button>
+            </a>
+            <a asp-controller="HOA_DON" asp-action="Admin_Index" asp-route-value="2">
+                <button class="btn btn-primary @(TempData["currentValue"]?.ToString() == "2" ? "active" : "")">Đang giao</button>
+            </a>
+            <a asp-controller="HOA_DON" asp-action="Admin_Index" asp-route-value="3">
+                <button class="btn btn-primary @(TempData["currentValue"]?.ToString() == "3" ? "active" : "")">Đã giao</button>
+            </a>
+            <a asp-controller="HOA_DON" asp-action="Admin_Index" asp-route-value="4">
+                <button class="btn btn-primary @(TempData["currentValue"]?.ToString() == "4" ? "active" : "")">Đã hủy</button>
+            </a>
+        </div>
+
+
+
+
+
+
+    </div>
+    <div class="col-12 mt-5">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Mã đơn hàng</th>
+                    <th>Họ Tên</th>
+                    <th>Ngày Đặt</th>
+                    <th>Ghi chú</th>
+                    <th>Trạng Thái</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if(Model != null)
+                {
+                    int i = 1;
+                    @foreach (var item in Model)
+                    { 
+                       
+                        <tr>
+                            <td> @i</td>
+                            <td> <a asp-action="ChiTietDonHang" asp-controller="HOA_DON" asp-route-id="@item.MaHD" style="box-shadow: 0 3px #60206c;">@item.MaHD</a></td>
+                            <td>@item.GIO_HANG.NGUOI_DUNG.TenND</td>
+                            <td>@item.NgayTao</td>
+                            <td>@item.GhiChu?.Substring(0, Math.Min(item.GhiChu.Length, 20))</td>
+                            @if (item.TrangThai == 0)
+                            {
+                                <td style="color: orange">
+                                    Chờ xác nhận
+                                </td>
+                            }
+                            @if (item.TrangThai == 1)
+                            {
+                                <td style="color: blue">
+                                    Chờ giao
+                                </td>
+                            }
+                            @if (item.TrangThai == 2)
+                            {
+                                <td style="color: green">
+                                    Đang giao
+                                </td>
+                            }
+                            @if (item.TrangThai == 3)
+                            {
+                                <td style="color: forestgreen">
+                                    Đã giao
+                                </td>
+                            }
+                            @if (item.TrangThai == 4)
+                            {
+                                <td style="color: red">
+                                    Đã hủy
+                                </td>
+                            }
+                            
+                            <td >
+                                @if (item.TrangThai == 0 && (TempData["PhanQuyen"] as bool?) == true)
+                                {
+                                    <a asp-controller="HOA_DON" asp-action="XacNhan" asp-route-id="@item.MaHD" class="btn btn-primary">Xác Nhận</a>
+                                }
+                                @if (item.TrangThai == 1 && (TempData["PhanQuyen"] as bool?) == true)
+                                {
+                                    <a asp-controller="HOA_DON" asp-action="GiaoHang" asp-route-id="@item.MaHD" class="btn btn-info">Giao Hàng</a>
+                                }
+                                @if (item.TrangThai == 2 && (TempData["PhanQuyen"] as bool?) == false)
+                                {
+                                    <a asp-controller="HOA_DON" asp-action="DaGiao" asp-route-id="@item.MaHD" class="btn btn-info">Đã Nhận</a>
+                                }
+                                @if (item.TrangThai == 3 && (TempData["PhanQuyen"] as bool?) == false)
+                                {
+                                   
+                                }
+                                @if (item.TrangThai == 4 && (TempData["PhanQuyen"] as bool?) == false)
+                                {
+                                   
+                                }
+                                
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                }
+               
+            </tbody>
+        </table>
+    
+</div>
