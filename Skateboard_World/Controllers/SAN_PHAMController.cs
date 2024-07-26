@@ -138,9 +138,15 @@ namespace Skateboard_World.Controllers
                             _context.Add(hinhAnh);
                         }
                     }
+
+                    await _context.SaveChangesAsync();
+                    TempData["update_Success"] = "Thêm sản phẩm thành công";
+                }
+                else
+                {
+                    TempData["update_Fail"] = "Thêm sản phẩm thất bại";
                 }
 
-                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
 
@@ -175,6 +181,7 @@ namespace Skateboard_World.Controllers
                 {
                     return NotFound();
                 }
+
 
                 return View(sAN_PHAM);
             }
@@ -242,6 +249,7 @@ namespace Skateboard_World.Controllers
                     }
 
                     await _context.SaveChangesAsync();
+                    TempData["update_Success"] = "Cập nhật sản phẩm thành công";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -258,53 +266,51 @@ namespace Skateboard_World.Controllers
             }
             return View(sAN_PHAM);
         }
-/*        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteImage(int? id)
+        /*        [HttpPost]
+                [ValidateAntiForgeryToken]
+                public async Task<IActionResult> DeleteImage(int? id)
+                {
+                    if (id == null)
+                    {
+                        return NotFound();
+                    }
+
+                    var image = await _context.db_DS_HINH_ANH.FindAsync(id);
+                    if (image == null)
+                    {
+                        return NotFound();
+                    }
+
+                    _context.db_DS_HINH_ANH.Remove(image);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Edit), new { id = image.MaSP });
+                }*/
+
+        // GET: SAN_PHAM/Delete/5
+        [HttpGet]
+        public async Task<IActionResult> Delete(int? id)
         {
+            string? userID = HttpContext.Request.Cookies["UserID"];
+            if (userID == null)
+            {
+                return RedirectToAction("Index", "DangNhap");
+            }
+
             if (id == null)
             {
                 return NotFound();
             }
 
-            var image = await _context.db_DS_HINH_ANH.FindAsync(id);
-            if (image == null)
+            var sAN_PHAM = await _context.db_SAN_PHAM
+                .Include(s => s.DS_HINH_ANH)
+                .FirstOrDefaultAsync(m => m.MaSP == id);
+
+            if (sAN_PHAM == null)
             {
                 return NotFound();
             }
 
-            _context.db_DS_HINH_ANH.Remove(image);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Edit), new { id = image.MaSP });
-        }*/
-
-        // GET: SAN_PHAM/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            string? userID = HttpContext.Request.Cookies["UserID"];
-            if (userID != null)
-            {
-
-                if (id == null)
-                {
-                    return NotFound();
-                }
-                var sAN_PHAM = await _context.db_SAN_PHAM
-                    .Include(s => s.DS_HINH_ANH)
-                    .FirstOrDefaultAsync(m => m.MaSP == id);
-
-                if (sAN_PHAM == null)
-                {
-                    return NotFound();
-                }
-
-                return View(sAN_PHAM);
-            }
-            else
-            {
-                return RedirectToAction("Index", "DangNhap");
-            }
-
+            return View(sAN_PHAM);
         }
 
         // POST: SAN_PHAM/Delete/5
@@ -318,11 +324,10 @@ namespace Skateboard_World.Controllers
                 sAN_PHAM.TrangThai = false;
                 sAN_PHAM.SoLuong = 0;
                 _context.db_SAN_PHAM.Update(sAN_PHAM);
-                TempData["ThanhCong"] = "Xóa sản phẩm thành công";
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
+                TempData["update_Success"] = "Xóa sản phẩm thành công";
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 

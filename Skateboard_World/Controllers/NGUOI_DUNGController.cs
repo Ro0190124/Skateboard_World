@@ -80,6 +80,7 @@ namespace Skateboard_World.Controllers
         // GET: NGUOI_DUNG/Create
         public IActionResult Create()
         {
+
             string? userID = HttpContext.Request.Cookies["UserID"];
             if (userID != null)
             {
@@ -99,8 +100,23 @@ namespace Skateboard_World.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MaND,TenND,SoDienThoai,Email,TenTaiKhoan,MatKhau,NgaySinh,NgayTao,DiaChi,TrangThai")] NGUOI_DUNG nGUOI_DUNG)
         {
+            NGUOI_DUNG? check = _context.db_NGUOI_DUNG.Where(x => x.TenTaiKhoan == nGUOI_DUNG.TenTaiKhoan && x.TrangThai == true).FirstOrDefault();
+            if (check != null)
+            {
+
+                TempData["create_Fail"] = "Tên tài khoản đã tồn tại";
+                return View();
+            }
+            NGUOI_DUNG? check_SDT = _context.db_NGUOI_DUNG.Where(x => x.SoDienThoai == nGUOI_DUNG.SoDienThoai && x.TrangThai == true).FirstOrDefault();
+            if (check == null && check_SDT != null)
+            {
+                TempData["tb_DangKi_KhongThanhCong"] = "Số Điện Thoại đã tồn tại";
+                return View();
+            }
+
             if (ModelState.IsValid)
             {
+                
                 nGUOI_DUNG.PhanQuyen = true;
                 if(nGUOI_DUNG.NgaySinh == null)
                 {
@@ -157,6 +173,7 @@ namespace Skateboard_World.Controllers
                 {
                     nGUOI_DUNG.PhanQuyen = true;
                     _context.Update(nGUOI_DUNG);
+                    TempData["create_Success"] = "Sửa người dùng thành công";
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -210,7 +227,9 @@ namespace Skateboard_World.Controllers
             var nGUOI_DUNG = await _context.db_NGUOI_DUNG.FindAsync(id);
             if (nGUOI_DUNG != null)
             {
-                _context.db_NGUOI_DUNG.Remove(nGUOI_DUNG);
+               nGUOI_DUNG.TrangThai = false;
+                _context.Update(nGUOI_DUNG);
+                TempData["delete_Success"] = "Xóa người dùng thành công";   
             }
 
             await _context.SaveChangesAsync();

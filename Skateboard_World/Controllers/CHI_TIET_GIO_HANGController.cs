@@ -66,6 +66,11 @@ namespace Skateboard_World.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ThemVaoGioHang(int id, int quantity)
         {
+            if(quantity < 1)
+            {
+                TempData["SoLuongSP"] = "Số lượng sản phẩm phải lớn hơn 0";
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
             string? userID = HttpContext.Request.Cookies["UserID"];
             if (userID != null)
             {
@@ -285,7 +290,7 @@ namespace Skateboard_World.Controllers
             var cookie = Request.Cookies["UserID"];
             var gioHang = _context.db_GIO_HANG.Where(x => x.MaNguoiDung == int.Parse(cookie)).ToList(); // Trả về giỏ hàng của người dùng
             var gioHangChuaCoTrongHoaDon = gioHang.FirstOrDefault(x => !_context.db_HOA_DON.Any(y => y.MaGioHang == x.MaGioHang)); // Trả về giỏ hàng của người dùng chưa có trong hóa đơn
-            Console.WriteLine(gioHangChuaCoTrongHoaDon.MaGioHang);
+          
             // Tìm chi tiết giỏ hàng
 
             var chiTietGioHang = _context.db_CHI_TIET_GIO_HANG.FirstOrDefault(x => x.MaGioHang == gioHangChuaCoTrongHoaDon.MaGioHang && x.MaSP == itemId);
@@ -425,9 +430,11 @@ namespace Skateboard_World.Controllers
                 TempData["tbDatHang"] = "Đặt hàng thành công!";
                 return RedirectToAction("Index", "USER_SAN_PHAM");
             }
-
-            TempData["tbDatHangLoi"] = "Có lỗi xảy ra khi đặt hàng.";
-            return RedirectToAction("ChiTietGioHang", "GioHang");
+            else
+            {
+                TempData["DangNhap_User"] = "Vui lòng đăng nhập để vào giỏ hàng";
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
         }
 
     }

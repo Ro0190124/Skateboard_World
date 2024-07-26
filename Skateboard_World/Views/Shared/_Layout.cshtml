@@ -10,9 +10,11 @@
     <!-- CSS Files -->
     <link href="/css/assets/css/material-dashboard.css" rel="stylesheet" />
     <!--Lk thông báo-->
-    <link rel="stylesheet" href="~/js/toastr.js/toastr.min.css" />
-    <script src="~/js/toastr.js/toastr.min.js"></script>
-    <link  href="~/css/donHang.css " rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/js/toastr.js/toastr.min.css" />
+    <script src="/js/toastr.js/toastr.min.js"></script>
   
 </head>
 <body class="dark-edition">
@@ -27,7 +29,7 @@
                     Tip 2: you can also add an image using data-image tag
                 -->
                 <div class="logo">
-                    <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+                    <a asp-action="Index" asp-controller="Home" class="simple-text logo-normal">
                         Skateboard World
                     </a>
                 </div>

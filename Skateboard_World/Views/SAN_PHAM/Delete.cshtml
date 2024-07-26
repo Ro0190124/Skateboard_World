@@ -5,8 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<form asp-action="Delete" enctype="multipart/form-data">
-  
+<form asp-action="Delete" method="post">
+    <input asp-for="MaSP" type="hidden" class="form-control" />
     <div>
         <h2 style="color: red">Vui lòng xem xét thông tin kỹ lưỡng trước khi xóa</h2>
         <dl class="row" style="color:white">
@@ -27,7 +27,6 @@
                         <p>Không có hình ảnh</p>
                     }
                 </div>
-
             </dd>
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.TenSP)
@@ -85,8 +84,7 @@
         </dl>
     </div>
     <div>
-        <a asp-action="Delete" asp-route-id="@Model?.MaSP"><button class="btn btn-danger">XÓA</button></a> |
+        <input type="submit" value="Xóa" asp-route-id="@Model.MaSP" class="btn btn-success" />
         <a asp-action="Index" asp-controller="SAN_PHAM" class="btn btn-primary">Trở về</a>
     </div>
-
 </form>

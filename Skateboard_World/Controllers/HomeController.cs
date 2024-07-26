@@ -24,10 +24,10 @@ namespace Skateboard_World.Controllers
             string? userID = HttpContext.Request.Cookies["UserID"];
             if (userID != null)
             {
-                var today = DateTime.Now.Date;
+                var today = DateTime.Now.Month;
                 // Retrieve completed orders
                 var hoaDonQuery = _context.db_HOA_DON.AsQueryable();
-                var hoaDon = await hoaDonQuery.Where(hd => hd.TrangThai == 3 && hd.NgayTao.Date == today).ToListAsync();
+                var hoaDon = await hoaDonQuery.Where(hd => hd.TrangThai == 3 && hd.NgayTao.Month == today).ToListAsync();
                 var totalOrders = hoaDon.Count;
 
                 // Get the list of MaGioHang from completed orders

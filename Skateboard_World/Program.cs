@@ -13,8 +13,9 @@ namespace Skateboard_World
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<ApplicationDbContext>(
                options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
             var app = builder.Build();
-           
+
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -33,8 +34,8 @@ namespace Skateboard_World
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=DangNhap}/{action=Index}/{id?}");
-
+                pattern: "{controller=USER_SAN_PHAM}/{action=Index}/"
+            );
             app.Run();
         }
     }

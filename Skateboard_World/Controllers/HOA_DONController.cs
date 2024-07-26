@@ -16,6 +16,7 @@ namespace Skateboard_World.Controllers
         }
         public IActionResult Admin_Index(string value)
         {
+            
             if (value == null)
             {
                 value = "0";
@@ -27,7 +28,9 @@ namespace Skateboard_World.Controllers
 
             if (userID == null)
             {
-                return NotFound();
+                TempData["DangNhap_User"] = "Vui lòng đăng nhập";
+                return Redirect(Request.Headers["Referer"].ToString());
+              
             }
             else
             {

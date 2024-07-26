@@ -42,10 +42,10 @@
                     <small class="fa fa-star text-primary"></small>
                     <small class="fa fa-star text-primary"></small>
                     <small class="fa fa-star text-primary"></small>
-                    <small>(99)</small>
+                    
                 </div>
                 <a asp-action="Details" asp-route-id="@item.SanPham.MaSP" asp-controller="USER_SAN_PHAM" class="h6 d-inline-block mb-2">@item.SanPham.TenSP</a>
-                <h5 class="text-primary mb-3">@item.SanPham.GiaBan đ</h5>
+                <h5 class="text-primary mb-3">@item.SanPham.GiaBan.ToString("N0") đ</h5>
 
 
 
@@ -84,7 +84,6 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 @{
-
                     var spNoiBat = ViewData["SanPhamNoiBat"] as List<HINH_ANH_SAN_PHAM>;
                 }
 
@@ -99,8 +98,12 @@
                                 break;
                             }
                             <a asp-action="Details" asp-route-id="@item.SanPham.MaSP" asp-controller="USER_SAN_PHAM" class="h6 w-inline-block mb-2" style="color: white">@item.SanPham.TenSP</a>
-                            <h5 class="fw-light lh-base text-white">@item.SanPham.GiaBan đ </h5>
-                            <a href="" class="btn btn-outline-success px-3">Thêm Vào Giò</a>
+                            <h5 class="fw-light lh-base text-white">@item.SanPham.GiaBan.ToString("N0") đ </h5>
+                            <a class="btn btn-outline-success px-3" onclick="addToCart(@item.SanPham.MaSP, 1) ">Thêm Vào Giò</a>
+                            <form id="addToCartForm" method="post" asp-controller="CHI_TIET_GIO_HANG" asp-action="ThemVaoGioHang" style="display: none;">
+                                <input type="hidden" name="id" id="productId" />
+                                <input type="hidden" name="quantity" id="quantity" value="1" min="1" />
+                            </form>
                         </div>
 
                       

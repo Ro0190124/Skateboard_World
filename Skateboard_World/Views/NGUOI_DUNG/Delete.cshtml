@@ -90,7 +90,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="MaND" />
-        <input type="submit" value="Xóa" class="btn btn-danger" /> |
+        <input type="submit" value="Xóa" asp-route-id="@Model.MaND" class="btn btn-danger" /> |
         <a asp-action="Index" class="btn btn-primary" >Trở về</a>
     </form>
 </div>
